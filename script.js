@@ -269,43 +269,4 @@ document.addEventListener('DOMContentLoaded', function() {
         scrollActive();
         handleNavbarScroll();
     }, 100));
-
-    // 게임 모달 기능
-    const gameModal = document.getElementById('game-modal');
-    const gameIframe = document.getElementById('game-iframe');
-    const modalCloseBtn = document.querySelector('.game-modal-close');
-
-    // 모달 열기
-    document.querySelectorAll('[data-modal]').forEach(link => {
-        link.addEventListener('click', function(e) {
-            e.preventDefault();
-            const gameSrc = this.getAttribute('data-modal');
-            gameIframe.src = gameSrc;
-            gameModal.classList.add('active');
-            document.body.style.overflow = 'hidden';
-        });
-    });
-
-    // 모달 닫기
-    function closeModal() {
-        gameModal.classList.remove('active');
-        gameIframe.src = '';
-        document.body.style.overflow = '';
-    }
-
-    modalCloseBtn.addEventListener('click', closeModal);
-
-    // 배경 클릭 시 닫기
-    gameModal.addEventListener('click', function(e) {
-        if (e.target === gameModal) {
-            closeModal();
-        }
-    });
-
-    // ESC 키로 닫기
-    document.addEventListener('keydown', function(e) {
-        if (e.key === 'Escape' && gameModal.classList.contains('active')) {
-            closeModal();
-        }
-    });
 });
