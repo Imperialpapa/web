@@ -254,6 +254,8 @@ html {
     transform-style: preserve-3d;
     animation: spaceRotation 120s linear infinite;
     z-index: 0;
+    will-change: transform;
+    backface-visibility: hidden;
 }
 
 /* 3D 별 필드 레이어들 */
@@ -262,6 +264,8 @@ html {
     width: 100%;
     height: 100%;
     transform-style: preserve-3d;
+    will-change: transform;
+    backface-visibility: hidden;
 }
 
 .star-layer-1 {
@@ -348,6 +352,8 @@ html {
     height: 30px;
     z-index: 5;
     transform-style: preserve-3d;
+    will-change: transform, opacity;
+    backface-visibility: hidden;
 }
 
 .ufo1 {
@@ -496,6 +502,8 @@ html {
     z-index: 3;
     transform-style: preserve-3d;
     filter: drop-shadow(0 0 20px rgba(255, 255, 255, 0.3));
+    will-change: transform;
+    backface-visibility: hidden;
 }
 
 .planet1 {
