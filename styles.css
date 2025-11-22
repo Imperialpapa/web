@@ -1,0 +1,1229 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --primary-color: #667eea;
+    --secondary-color: #764ba2;
+    --accent-color: #f093fb;
+    --dark-color: #2d3748;
+    --light-color: #f7fafc;
+    --text-color: #4a5568;
+    --white: #ffffff;
+    --shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    --shadow-hover: 0 20px 40px rgba(0, 0, 0, 0.15);
+    --gradient: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+    --gradient-accent: linear-gradient(135deg, var(--accent-color), var(--primary-color));
+}
+
+body {
+    font-family: 'Inter', sans-serif;
+    line-height: 1.6;
+    color: var(--text-color);
+    overflow-x: hidden;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+/* Navigation */
+.navbar {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(10px);
+    z-index: 1000;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
+}
+
+.nav-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 1rem 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.nav-logo h2 {
+    background: var(--gradient);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    font-weight: 700;
+}
+
+.nav-menu {
+    display: flex;
+    gap: 2rem;
+}
+
+.nav-link {
+    text-decoration: none;
+    color: var(--text-color);
+    font-weight: 500;
+    transition: all 0.3s ease;
+    position: relative;
+}
+
+.nav-link:hover {
+    color: var(--primary-color);
+}
+
+.nav-link::after {
+    content: '';
+    position: absolute;
+    bottom: -5px;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background: var(--gradient);
+    transition: width 0.3s ease;
+}
+
+.nav-link:hover::after {
+    width: 100%;
+}
+
+.nav-toggle {
+    display: none;
+    flex-direction: column;
+    cursor: pointer;
+}
+
+.bar {
+    width: 25px;
+    height: 3px;
+    background: var(--text-color);
+    margin: 3px 0;
+    transition: 0.3s;
+}
+
+/* Hero Section */
+.hero {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    background: radial-gradient(ellipse at center, #0c0e27 0%, #000814 70%, #000000 100%);
+    position: relative;
+    padding-top: 80px;
+    overflow: hidden;
+    perspective: 2000px;
+    perspective-origin: center center;
+}
+
+.hero-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    align-items: center;
+}
+
+.hero-title {
+    font-size: 3.5rem;
+    font-weight: 700;
+    line-height: 1.2;
+    margin-bottom: 1.5rem;
+    color: var(--dark-color);
+}
+
+.highlight {
+    background: var(--gradient);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.hero-description {
+    font-size: 1.25rem;
+    margin-bottom: 2rem;
+    opacity: 0.8;
+}
+
+.hero-buttons {
+    display: flex;
+    gap: 1rem;
+}
+
+.btn {
+    padding: 1rem 2rem;
+    border-radius: 50px;
+    text-decoration: none;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    display: inline-block;
+    position: relative;
+    overflow: hidden;
+}
+
+.btn-primary {
+    background: var(--gradient);
+    color: var(--white);
+    box-shadow: var(--shadow);
+}
+
+.btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-hover);
+}
+
+.btn-secondary {
+    background: var(--white);
+    color: var(--text-color);
+    border: 2px solid var(--primary-color);
+}
+
+.btn-secondary:hover {
+    background: var(--primary-color);
+    color: var(--white);
+    transform: translateY(-2px);
+}
+
+.hero-image {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.profile-circle {
+    width: 300px;
+    height: 300px;
+    border-radius: 50%;
+    background: var(--gradient);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: var(--shadow-hover);
+    animation: float 6s ease-in-out infinite;
+}
+
+.profile-circle i {
+    font-size: 6rem;
+    color: var(--white);
+}
+
+@keyframes float {
+    0%, 100% { transform: translateY(0px); }
+    50% { transform: translateY(-20px); }
+}
+
+.scroll-indicator {
+    position: absolute;
+    bottom: 30px;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.scroll-arrow {
+    width: 30px;
+    height: 30px;
+    border: 2px solid var(--primary-color);
+    border-top: none;
+    border-left: none;
+    transform: rotate(45deg);
+    animation: bounce 2s infinite;
+}
+
+@keyframes bounce {
+    0%, 20%, 50%, 80%, 100% { transform: translateY(0) rotate(45deg); }
+    40% { transform: translateY(-10px) rotate(45deg); }
+    60% { transform: translateY(-5px) rotate(45deg); }
+}
+
+/* 3D 우주 환경 컨테이너 */
+.space-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    transform-style: preserve-3d;
+    animation: spaceRotation 120s linear infinite;
+    z-index: 0;
+}
+
+/* 3D 별 필드 레이어들 */
+.star-layer {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    transform-style: preserve-3d;
+}
+
+.star-layer-1 {
+    transform: translateZ(-800px);
+    animation: starDrift1 80s linear infinite;
+}
+
+.star-layer-2 {
+    transform: translateZ(-400px);
+    animation: starDrift2 60s linear infinite;
+}
+
+.star-layer-3 {
+    transform: translateZ(-200px);
+    animation: starDrift3 40s linear infinite;
+}
+
+/* 3D 별들 */
+.star {
+    position: absolute;
+    background: white;
+    border-radius: 50%;
+    box-shadow: 0 0 10px white;
+}
+
+.star-small {
+    width: 1px;
+    height: 1px;
+    opacity: 0.6;
+}
+
+.star-medium {
+    width: 2px;
+    height: 2px;
+    opacity: 0.8;
+    box-shadow: 0 0 15px white;
+}
+
+.star-large {
+    width: 3px;
+    height: 3px;
+    opacity: 1;
+    box-shadow: 0 0 20px white;
+    animation: starPulse 3s ease-in-out infinite;
+}
+
+@keyframes starPulse {
+    0%, 100% { opacity: 0.8; transform: scale(1); }
+    50% { opacity: 1; transform: scale(1.2); }
+}
+
+@keyframes starDrift1 {
+    0% { transform: translateZ(-800px) translateX(0) translateY(0); }
+    100% { transform: translateZ(-800px) translateX(-100px) translateY(-50px); }
+}
+
+@keyframes starDrift2 {
+    0% { transform: translateZ(-400px) translateX(0) translateY(0); }
+    100% { transform: translateZ(-400px) translateX(-200px) translateY(-100px); }
+}
+
+@keyframes starDrift3 {
+    0% { transform: translateZ(-200px) translateX(0) translateY(0); }
+    100% { transform: translateZ(-200px) translateX(-300px) translateY(-150px); }
+}
+
+@keyframes spaceRotation {
+    0% { transform: rotateY(0deg) rotateX(0deg); }
+    25% { transform: rotateY(90deg) rotateX(5deg); }
+    50% { transform: rotateY(180deg) rotateX(0deg); }
+    75% { transform: rotateY(270deg) rotateX(-5deg); }
+    100% { transform: rotateY(360deg) rotateX(0deg); }
+}
+
+.hero-container {
+    position: relative;
+    z-index: 10;
+}
+
+/* 3D 비행접시 */
+.ufo {
+    position: absolute;
+    width: 60px;
+    height: 30px;
+    z-index: 5;
+    transform-style: preserve-3d;
+}
+
+.ufo1 {
+    top: 20%;
+    left: 10%;
+    animation: ufo3DFlight1 30s linear infinite;
+}
+
+.ufo2 {
+    top: 60%;
+    right: 15%;
+    animation: ufo3DFlight2 35s linear infinite;
+}
+
+.ufo3 {
+    top: 40%;
+    left: 50%;
+    animation: ufo3DFlight3 25s linear infinite;
+}
+
+.ufo-body {
+    width: 100%;
+    height: 60%;
+    background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+    border-radius: 50%;
+    position: relative;
+    box-shadow: 0 0 20px rgba(79, 172, 254, 0.6);
+}
+
+.ufo-dome {
+    position: absolute;
+    top: -40%;
+    left: 25%;
+    width: 50%;
+    height: 80%;
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.3) 0%, rgba(255, 255, 255, 0.1) 100%);
+    border-radius: 50%;
+    border: 1px solid rgba(255, 255, 255, 0.4);
+}
+
+.ufo-lights {
+    position: absolute;
+    bottom: -10%;
+    left: 0;
+    right: 0;
+    height: 20%;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.ufo-light {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: #fff;
+    box-shadow: 0 0 10px #fff;
+    animation: blinkLights 1.5s ease-in-out infinite alternate;
+}
+
+.ufo-light:nth-child(2) { animation-delay: 0.3s; }
+.ufo-light:nth-child(3) { animation-delay: 0.6s; }
+.ufo-light:nth-child(4) { animation-delay: 0.9s; }
+
+@keyframes blinkLights {
+    0% { opacity: 0.3; }
+    100% { opacity: 1; }
+}
+
+/* 3D UFO 비행 경로 애니메이션 */
+@keyframes ufo3DFlight1 {
+    0% { 
+        transform: translateX(-200px) translateY(0) translateZ(-500px) rotateY(-45deg) rotateX(10deg);
+        opacity: 0;
+    }
+    10% { opacity: 0.3; }
+    25% { 
+        transform: translateX(20vw) translateY(-50px) translateZ(200px) rotateY(0deg) rotateX(-5deg);
+        opacity: 1;
+    }
+    50% { 
+        transform: translateX(60vw) translateY(30px) translateZ(-100px) rotateY(30deg) rotateX(15deg);
+        opacity: 1;
+    }
+    75% { 
+        transform: translateX(90vw) translateY(-20px) translateZ(-300px) rotateY(60deg) rotateX(-10deg);
+        opacity: 0.7;
+    }
+    90% { opacity: 0.3; }
+    100% { 
+        transform: translateX(calc(100vw + 200px)) translateY(-80px) translateZ(-600px) rotateY(90deg) rotateX(-20deg);
+        opacity: 0;
+    }
+}
+
+@keyframes ufo3DFlight2 {
+    0% { 
+        transform: translateX(calc(100vw + 150px)) translateY(-30px) translateZ(-400px) rotateY(135deg) rotateX(-15deg);
+        opacity: 0;
+    }
+    15% { opacity: 0.4; }
+    30% { 
+        transform: translateX(70vw) translateY(20px) translateZ(150px) rotateY(180deg) rotateX(5deg);
+        opacity: 1;
+    }
+    50% { 
+        transform: translateX(30vw) translateY(60px) translateZ(-50px) rotateY(210deg) rotateX(20deg);
+        opacity: 1;
+    }
+    70% { 
+        transform: translateX(10vw) translateY(10px) translateZ(-250px) rotateY(240deg) rotateX(-8deg);
+        opacity: 0.8;
+    }
+    85% { opacity: 0.4; }
+    100% { 
+        transform: translateX(-200px) translateY(100px) translateZ(-500px) rotateY(270deg) rotateX(25deg);
+        opacity: 0;
+    }
+}
+
+@keyframes ufo3DFlight3 {
+    0% { 
+        transform: translateX(50vw) translateY(calc(100vh + 100px)) translateZ(-600px) rotateY(0deg) rotateX(45deg);
+        opacity: 0;
+    }
+    20% { opacity: 0.5; }
+    40% { 
+        transform: translateX(30vw) translateY(40vh) translateZ(100px) rotateY(-30deg) rotateX(-10deg);
+        opacity: 1;
+    }
+    60% { 
+        transform: translateX(70vw) translateY(20vh) translateZ(-200px) rotateY(45deg) rotateX(30deg);
+        opacity: 1;
+    }
+    80% { opacity: 0.5; }
+    100% { 
+        transform: translateX(90vw) translateY(-150px) translateZ(-700px) rotateY(90deg) rotateX(60deg);
+        opacity: 0;
+    }
+}
+
+/* 3D 행성들 */
+.planet {
+    position: absolute;
+    border-radius: 50%;
+    z-index: 3;
+    transform-style: preserve-3d;
+    filter: drop-shadow(0 0 20px rgba(255, 255, 255, 0.3));
+}
+
+.planet1 {
+    width: 80px;
+    height: 80px;
+    top: 15%;
+    right: 20%;
+    background: radial-gradient(circle at 30% 30%, #ff9a9e 0%, #fecfef 50%, #d6336c 100%);
+    box-shadow: 
+        inset 10px 10px 20px rgba(0, 0, 0, 0.3),
+        0 0 40px rgba(255, 154, 158, 0.6);
+    animation: planet3DOrbit1 60s linear infinite;
+}
+
+.planet2 {
+    width: 50px;
+    height: 50px;
+    bottom: 25%;
+    left: 15%;
+    background: radial-gradient(circle at 35% 25%, #a8edea 0%, #fed6e3 50%, #2ec4b6 100%);
+    box-shadow: 
+        inset 8px 8px 15px rgba(0, 0, 0, 0.3),
+        0 0 30px rgba(168, 237, 234, 0.6);
+    animation: planet3DOrbit2 45s linear infinite;
+}
+
+.planet3 {
+    width: 120px;
+    height: 120px;
+    top: 10%;
+    left: 10%;
+    background: radial-gradient(circle at 40% 20%, #ffecd2 0%, #fcb69f 50%, #ff8e53 100%);
+    box-shadow: 
+        inset 15px 15px 25px rgba(0, 0, 0, 0.3),
+        0 0 50px rgba(255, 236, 210, 0.8);
+    animation: planet3DOrbit3 80s linear infinite;
+}
+
+.planet4 {
+    width: 60px;
+    height: 60px;
+    top: 60%;
+    right: 10%;
+    background: radial-gradient(circle at 25% 35%, #667eea 0%, #764ba2 50%, #2d1b69 100%);
+    box-shadow: 
+        inset 10px 10px 18px rgba(0, 0, 0, 0.3),
+        0 0 35px rgba(102, 126, 234, 0.7);
+    animation: planet3DOrbit4 70s linear infinite;
+}
+
+@keyframes planet3DOrbit1 {
+    0% { 
+        transform: rotateY(0deg) rotateX(0deg) translateZ(-200px) rotateZ(0deg);
+    }
+    25% { 
+        transform: rotateY(90deg) rotateX(15deg) translateZ(100px) rotateZ(90deg);
+    }
+    50% { 
+        transform: rotateY(180deg) rotateX(0deg) translateZ(-200px) rotateZ(180deg);
+    }
+    75% { 
+        transform: rotateY(270deg) rotateX(-15deg) translateZ(100px) rotateZ(270deg);
+    }
+    100% { 
+        transform: rotateY(360deg) rotateX(0deg) translateZ(-200px) rotateZ(360deg);
+    }
+}
+
+@keyframes planet3DOrbit2 {
+    0% { 
+        transform: rotateY(0deg) rotateX(10deg) translateZ(-150px) rotateZ(0deg);
+    }
+    33% { 
+        transform: rotateY(120deg) rotateX(-10deg) translateZ(200px) rotateZ(120deg);
+    }
+    66% { 
+        transform: rotateY(240deg) rotateX(20deg) translateZ(-100px) rotateZ(240deg);
+    }
+    100% { 
+        transform: rotateY(360deg) rotateX(10deg) translateZ(-150px) rotateZ(360deg);
+    }
+}
+
+@keyframes planet3DOrbit3 {
+    0% { 
+        transform: rotateY(0deg) rotateX(-5deg) translateZ(-400px) rotateZ(0deg);
+    }
+    20% { 
+        transform: rotateY(72deg) rotateX(10deg) translateZ(300px) rotateZ(72deg);
+    }
+    40% { 
+        transform: rotateY(144deg) rotateX(-15deg) translateZ(-100px) rotateZ(144deg);
+    }
+    60% { 
+        transform: rotateY(216deg) rotateX(20deg) translateZ(250px) rotateZ(216deg);
+    }
+    80% { 
+        transform: rotateY(288deg) rotateX(-10deg) translateZ(-200px) rotateZ(288deg);
+    }
+    100% { 
+        transform: rotateY(360deg) rotateX(-5deg) translateZ(-400px) rotateZ(360deg);
+    }
+}
+
+@keyframes planet3DOrbit4 {
+    0% { 
+        transform: rotateY(0deg) rotateX(20deg) translateZ(-300px) rotateZ(0deg);
+    }
+    30% { 
+        transform: rotateY(108deg) rotateX(-5deg) translateZ(150px) rotateZ(108deg);
+    }
+    60% { 
+        transform: rotateY(216deg) rotateX(25deg) translateZ(-180px) rotateZ(216deg);
+    }
+    100% { 
+        transform: rotateY(360deg) rotateX(20deg) translateZ(-300px) rotateZ(360deg);
+    }
+}
+
+/* 혜성 */
+.comet {
+    position: absolute;
+    width: 3px;
+    height: 3px;
+    background: white;
+    border-radius: 50%;
+    z-index: 1;
+}
+
+.comet1 {
+    top: 10%;
+    left: -10%;
+    animation: cometFlight1 15s linear infinite;
+}
+
+.comet2 {
+    top: 80%;
+    right: -10%;
+    animation: cometFlight2 18s linear infinite;
+}
+
+.comet::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -20px;
+    width: 20px;
+    height: 2px;
+    background: linear-gradient(90deg, transparent 0%, rgba(255, 255, 255, 0.8) 50%, white 100%);
+    border-radius: 1px;
+}
+
+@keyframes cometFlight1 {
+    0% { 
+        transform: translateX(-50px) translateY(-20px);
+        opacity: 0;
+    }
+    10% { opacity: 1; }
+    90% { opacity: 1; }
+    100% { 
+        transform: translateX(calc(100vw + 50px)) translateY(50px);
+        opacity: 0;
+    }
+}
+
+@keyframes cometFlight2 {
+    0% { 
+        transform: translateX(50px) translateY(20px);
+        opacity: 0;
+    }
+    10% { opacity: 1; }
+    90% { opacity: 1; }
+    100% { 
+        transform: translateX(calc(-100vw - 50px)) translateY(-50px);
+        opacity: 0;
+    }
+}
+
+/* 히어로 텍스트 색상 조정 */
+.hero-title {
+    color: #ffffff;
+    text-shadow: 0 0 20px rgba(102, 126, 234, 0.5);
+}
+
+.hero-description {
+    color: #e2e8f0;
+    opacity: 0.9;
+}
+
+/* Section Styling */
+.section-header {
+    text-align: center;
+    margin-bottom: 4rem;
+}
+
+.section-title {
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+    color: var(--dark-color);
+}
+
+.section-subtitle {
+    font-size: 1.25rem;
+    color: var(--text-color);
+    opacity: 0.8;
+}
+
+/* About Section */
+.about {
+    padding: 6rem 0;
+    background: var(--white);
+}
+
+.about-content {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 4rem;
+    align-items: center;
+}
+
+.about-text h3 {
+    font-size: 2rem;
+    margin-bottom: 1.5rem;
+    color: var(--dark-color);
+}
+
+.about-text p {
+    font-size: 1.1rem;
+    margin-bottom: 2rem;
+    line-height: 1.8;
+}
+
+.about-stats {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2rem;
+}
+
+.stat-item {
+    text-align: center;
+}
+
+.stat-number {
+    display: block;
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--primary-color);
+}
+
+.stat-label {
+    font-size: 0.9rem;
+    opacity: 0.8;
+}
+
+.about-photo {
+    width: 250px;
+    height: 250px;
+    border-radius: 50%;
+    background: var(--gradient-accent);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0 auto;
+    box-shadow: var(--shadow);
+}
+
+.about-photo i {
+    font-size: 5rem;
+    color: var(--white);
+}
+
+/* Projects Section */
+.projects {
+    padding: 6rem 0;
+    background: var(--light-color);
+}
+
+.projects-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    gap: 2rem;
+}
+
+.project-card {
+    background: var(--white);
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: var(--shadow);
+    transition: all 0.3s ease;
+}
+
+.project-card:hover {
+    transform: translateY(-10px);
+    box-shadow: var(--shadow-hover);
+}
+
+.project-image {
+    height: 200px;
+    background: var(--gradient);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.project-image i {
+    font-size: 4rem;
+    color: var(--white);
+}
+
+.project-content {
+    padding: 2rem;
+}
+
+.project-title {
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin-bottom: 1rem;
+    color: var(--dark-color);
+}
+
+.project-description {
+    margin-bottom: 1.5rem;
+    line-height: 1.6;
+}
+
+.project-tech {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-bottom: 1.5rem;
+}
+
+.tech-tag {
+    background: var(--primary-color);
+    color: var(--white);
+    padding: 0.25rem 0.75rem;
+    border-radius: 15px;
+    font-size: 0.8rem;
+    font-weight: 500;
+}
+
+.project-links {
+    display: flex;
+    gap: 1rem;
+}
+
+.project-link {
+    color: var(--primary-color);
+    text-decoration: none;
+    font-weight: 500;
+    transition: all 0.3s ease;
+}
+
+.project-link:hover {
+    color: var(--secondary-color);
+}
+
+/* Skills Section */
+.skills {
+    padding: 6rem 0;
+    background: var(--white);
+}
+
+.skills-content {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+    gap: 3rem;
+}
+
+.category-title {
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin-bottom: 2rem;
+    color: var(--dark-color);
+    text-align: center;
+}
+
+.skills-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.skill-item {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.skill-icon {
+    width: 50px;
+    height: 50px;
+    border-radius: 10px;
+    background: var(--gradient);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-shrink: 0;
+}
+
+.skill-icon i {
+    font-size: 1.5rem;
+    color: var(--white);
+}
+
+.skill-name {
+    font-weight: 600;
+    min-width: 100px;
+}
+
+.skill-bar {
+    flex: 1;
+    height: 10px;
+    background: var(--light-color);
+    border-radius: 5px;
+    overflow: hidden;
+}
+
+.skill-progress {
+    height: 100%;
+    background: var(--gradient);
+    border-radius: 5px;
+    transition: width 1s ease;
+}
+
+/* Contact Section */
+.contact {
+    padding: 6rem 0;
+    background: var(--light-color);
+}
+
+.contact-content {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+}
+
+.contact-item {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 2rem;
+}
+
+.contact-icon {
+    width: 50px;
+    height: 50px;
+    border-radius: 10px;
+    background: var(--gradient);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.contact-icon i {
+    color: var(--white);
+    font-size: 1.25rem;
+}
+
+.contact-details h4 {
+    font-weight: 600;
+    margin-bottom: 0.25rem;
+    color: var(--dark-color);
+}
+
+.contact-form {
+    background: var(--white);
+    padding: 2rem;
+    border-radius: 20px;
+    box-shadow: var(--shadow);
+}
+
+.form-group {
+    margin-bottom: 1.5rem;
+}
+
+.form-group input,
+.form-group textarea {
+    width: 100%;
+    padding: 1rem;
+    border: 2px solid var(--light-color);
+    border-radius: 10px;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+    font-family: inherit;
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+    outline: none;
+    border-color: var(--primary-color);
+}
+
+.form-group textarea {
+    resize: vertical;
+    min-height: 120px;
+}
+
+/* Footer */
+.footer {
+    background: var(--dark-color);
+    color: var(--white);
+    padding: 2rem 0;
+}
+
+.footer-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.social-links {
+    display: flex;
+    gap: 1rem;
+}
+
+.social-link {
+    width: 40px;
+    height: 40px;
+    background: var(--gradient);
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: var(--white);
+    text-decoration: none;
+    transition: all 0.3s ease;
+}
+
+.social-link:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .nav-menu {
+        position: fixed;
+        left: -100%;
+        top: 70px;
+        flex-direction: column;
+        background: var(--white);
+        width: 100%;
+        text-align: center;
+        transition: 0.3s;
+        box-shadow: var(--shadow);
+        padding: 2rem 0;
+    }
+
+    .nav-menu.active {
+        left: 0;
+    }
+
+    .nav-toggle {
+        display: flex;
+    }
+
+    .nav-toggle.active .bar:nth-child(2) {
+        opacity: 0;
+    }
+
+    .nav-toggle.active .bar:nth-child(1) {
+        transform: translateY(8px) rotate(45deg);
+    }
+
+    .nav-toggle.active .bar:nth-child(3) {
+        transform: translateY(-8px) rotate(-45deg);
+    }
+
+    .hero-container {
+        grid-template-columns: 1fr;
+        text-align: center;
+        gap: 2rem;
+    }
+
+    .hero-title {
+        font-size: 2.5rem;
+    }
+
+    .profile-circle {
+        width: 200px;
+        height: 200px;
+    }
+
+    .profile-circle i {
+        font-size: 4rem;
+    }
+
+    .about-content {
+        grid-template-columns: 1fr;
+        text-align: center;
+    }
+
+    .about-stats {
+        grid-template-columns: repeat(3, 1fr);
+    }
+
+    .contact-content {
+        grid-template-columns: 1fr;
+    }
+
+    .footer-content {
+        flex-direction: column;
+        gap: 1rem;
+        text-align: center;
+    }
+
+    .skills-content {
+        grid-template-columns: 1fr;
+    }
+
+    .projects-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .hero-buttons {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .btn {
+        width: 200px;
+        text-align: center;
+    }
+    
+    /* 모바일에서 3D 애니메이션 최적화 */
+    .hero {
+        perspective: 1000px; /* 모바일에서 perspective 줄이기 */
+    }
+    
+    .ufo {
+        display: none; /* 모바일에서는 성능을 위해 UFO 숨김 */
+    }
+    
+    .planet {
+        animation-duration: 100s; /* 애니메이션 속도를 느리게 */
+        transform: scale(0.7) !important; /* 크기 줄이기 */
+    }
+    
+    .comet {
+        display: none; /* 모바일에서는 혜성 숨김 */
+    }
+    
+    .space-container {
+        animation-duration: 180s; /* 우주 회전 느리게 */
+    }
+    
+    .star-layer {
+        animation-duration: 120s; /* 별 레이어 애니메이션 느리게 */
+    }
+}
+
+@media (max-width: 480px) {
+    .hero-title {
+        font-size: 2rem;
+    }
+
+    .section-title {
+        font-size: 2rem;
+    }
+
+    .about-stats {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+    }
+
+    .skill-item {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .skill-bar {
+        width: 100%;
+    }
+    
+    /* 작은 화면에서 추가 최적화 */
+    .hero {
+        perspective: 500px; /* 더 작은 perspective */
+    }
+    
+    .planet {
+        width: 30px !important;
+        height: 30px !important;
+        animation-duration: 150s; /* 더 느리게 */
+        transform: scale(0.5) !important; /* 더 작게 */
+    }
+    
+    .space-container {
+        animation-duration: 240s; /* 매우 느리게 */
+        opacity: 0.7; /* 투명도 조정 */
+    }
+    
+    .star-layer {
+        opacity: 0.5; /* 별들 투명도 조정 */
+    }
+}
+
+/* Animation Classes */
+.fade-in {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: all 0.6s ease;
+}
+
+.fade-in.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.slide-in-left {
+    opacity: 0;
+    transform: translateX(-50px);
+    transition: all 0.6s ease;
+}
+
+.slide-in-left.visible {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+.slide-in-right {
+    opacity: 0;
+    transform: translateX(50px);
+    transition: all 0.6s ease;
+}
+
+.slide-in-right.visible {
+    opacity: 1;
+    transform: translateX(0);
+}

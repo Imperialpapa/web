@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>개발자 포트폴리오</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <h2>Portfolio</h2>
+            </div>
+            <div class="nav-menu" id="nav-menu">
+                <a href="#home" class="nav-link">홈</a>
+                <a href="#about" class="nav-link">소개</a>
+                <a href="#projects" class="nav-link">프로젝트</a>
+                <a href="#skills" class="nav-link">기술</a>
+                <a href="#contact" class="nav-link">연락처</a>
+            </div>
+            <div class="nav-toggle" id="nav-toggle">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </div>
+        </div>
+    </nav>
+
+    <section id="home" class="hero">
+        <!-- 3D 우주 환경 컨테이너 -->
+        <div class="space-container">
+            <!-- 3D 별 필드 레이어들 -->
+            <div class="star-layer star-layer-1">
+                <div class="star star-small" style="top: 10%; left: 5%;"></div>
+                <div class="star star-medium" style="top: 20%; left: 15%;"></div>
+                <div class="star star-small" style="top: 35%; left: 25%;"></div>
+                <div class="star star-large" style="top: 45%; left: 35%;"></div>
+                <div class="star star-small" style="top: 60%; left: 45%;"></div>
+                <div class="star star-medium" style="top: 75%; left: 55%;"></div>
+                <div class="star star-small" style="top: 85%; left: 65%;"></div>
+                <div class="star star-large" style="top: 25%; left: 75%;"></div>
+                <div class="star star-small" style="top: 50%; left: 85%;"></div>
+                <div class="star star-medium" style="top: 70%; left: 95%;"></div>
+            </div>
+            
+            <div class="star-layer star-layer-2">
+                <div class="star star-medium" style="top: 15%; left: 10%;"></div>
+                <div class="star star-small" style="top: 30%; left: 20%;"></div>
+                <div class="star star-large" style="top: 40%; left: 30%;"></div>
+                <div class="star star-small" style="top: 55%; left: 40%;"></div>
+                <div class="star star-medium" style="top: 65%; left: 50%;"></div>
+                <div class="star star-small" style="top: 80%; left: 60%;"></div>
+                <div class="star star-large" style="top: 90%; left: 70%;"></div>
+                <div class="star star-small" style="top: 5%; left: 80%;"></div>
+                <div class="star star-medium" style="top: 25%; left: 90%;"></div>
+            </div>
+            
+            <div class="star-layer star-layer-3">
+                <div class="star star-large" style="top: 5%; left: 7%;"></div>
+                <div class="star star-small" style="top: 25%; left: 17%;"></div>
+                <div class="star star-medium" style="top: 45%; left: 27%;"></div>
+                <div class="star star-small" style="top: 65%; left: 37%;"></div>
+                <div class="star star-large" style="top: 80%; left: 47%;"></div>
+                <div class="star star-small" style="top: 15%; left: 57%;"></div>
+                <div class="star star-medium" style="top: 35%; left: 67%;"></div>
+                <div class="star star-small" style="top: 55%; left: 77%;"></div>
+                <div class="star star-large" style="top: 75%; left: 87%;"></div>
+            </div>
+        </div>
+        
+        <!-- 3D 비행접시들 -->
+        <div class="ufo ufo1">
+            <div class="ufo-body">
+                <div class="ufo-dome"></div>
+                <div class="ufo-lights">
+                    <div class="ufo-light"></div>
+                    <div class="ufo-light"></div>
+                    <div class="ufo-light"></div>
+                    <div class="ufo-light"></div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="ufo ufo2">
+            <div class="ufo-body">
+                <div class="ufo-dome"></div>
+                <div class="ufo-lights">
+                    <div class="ufo-light"></div>
+                    <div class="ufo-light"></div>
+                    <div class="ufo-light"></div>
+                    <div class="ufo-light"></div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="ufo ufo3">
+            <div class="ufo-body">
+                <div class="ufo-dome"></div>
+                <div class="ufo-lights">
+                    <div class="ufo-light"></div>
+                    <div class="ufo-light"></div>
+                    <div class="ufo-light"></div>
+                    <div class="ufo-light"></div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- 3D 행성들 -->
+        <div class="planet planet1"></div>
+        <div class="planet planet2"></div>
+        <div class="planet planet3"></div>
+        <div class="planet planet4"></div>
+        
+        <!-- 혜성들 -->
+        <div class="comet comet1"></div>
+        <div class="comet comet2"></div>
+        
+        <div class="hero-container">
+            <div class="hero-content">
+                <h1 class="hero-title">안녕하세요, <span class="highlight">풀스택 개발자</span> 입니다.</h1>
+                <p class="hero-description">창의적이고 효율적인 웹 솔루션을 만들어내는 열정적인 개발자입니다.</p>
+                <div class="hero-buttons">
+                    <a href="#projects" class="btn btn-primary">프로젝트 보기</a>
+                    <a href="#contact" class="btn btn-secondary">연락하기</a>
+                </div>
+            </div>
+            <div class="hero-image">
+                <div class="profile-circle">
+                    <i class="fas fa-code"></i>
+                </div>
+            </div>
+        </div>
+        <div class="scroll-indicator">
+            <div class="scroll-arrow"></div>
+        </div>
+    </section>
+
+    <section id="about" class="about">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">소개</h2>
+                <p class="section-subtitle">저에 대해 알아보세요</p>
+            </div>
+            <div class="about-content">
+                <div class="about-text">
+                    <h3>열정적인 개발자</h3>
+                    <p>5년 이상의 웹 개발 경험을 바탕으로 사용자 중심의 혁신적인 솔루션을 개발합니다. 새로운 기술을 배우고 적용하는 것을 즐기며, 팀과 함께 성장하는 것을 중요하게 생각합니다.</p>
+                    <div class="about-stats">
+                        <div class="stat-item">
+                            <span class="stat-number">50+</span>
+                            <span class="stat-label">완료된 프로젝트</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-number">5+</span>
+                            <span class="stat-label">경력 년수</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-number">20+</span>
+                            <span class="stat-label">만족한 클라이언트</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="about-image">
+                    <div class="about-photo">
+                        <i class="fas fa-user-circle"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="projects" class="projects">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">프로젝트</h2>
+                <p class="section-subtitle">제가 만든 작품들을 확인해보세요</p>
+            </div>
+            <div class="projects-grid">
+                <div class="project-card">
+                    <div class="project-image">
+                        <i class="fas fa-shopping-cart"></i>
+                    </div>
+                    <div class="project-content">
+                        <h3 class="project-title">E-커머스 플랫폼</h3>
+                        <p class="project-description">React와 Node.js를 활용한 완전한 온라인 쇼핑몰 플랫폼</p>
+                        <div class="project-tech">
+                            <span class="tech-tag">React</span>
+                            <span class="tech-tag">Node.js</span>
+                            <span class="tech-tag">MongoDB</span>
+                        </div>
+                        <div class="project-links">
+                            <a href="#" class="project-link"><i class="fas fa-external-link-alt"></i> 데모</a>
+                            <a href="#" class="project-link"><i class="fab fa-github"></i> 코드</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="project-card">
+                    <div class="project-image">
+                        <i class="fas fa-chart-line"></i>
+                    </div>
+                    <div class="project-content">
+                        <h3 class="project-title">데이터 분석 대시보드</h3>
+                        <p class="project-description">Vue.js와 D3.js를 활용한 실시간 데이터 시각화 도구</p>
+                        <div class="project-tech">
+                            <span class="tech-tag">Vue.js</span>
+                            <span class="tech-tag">D3.js</span>
+                            <span class="tech-tag">Python</span>
+                        </div>
+                        <div class="project-links">
+                            <a href="#" class="project-link"><i class="fas fa-external-link-alt"></i> 데모</a>
+                            <a href="#" class="project-link"><i class="fab fa-github"></i> 코드</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="project-card">
+                    <div class="project-image">
+                        <i class="fas fa-mobile-alt"></i>
+                    </div>
+                    <div class="project-content">
+                        <h3 class="project-title">로또 생성기</h3>
+                        <p class="project-description">행운의 번호를 생성하고 기록을 관리하는 모바일 친화적 웹 앱</p>
+                        <div class="project-tech">
+                            <span class="tech-tag">HTML5</span>
+                            <span class="tech-tag">CSS3</span>
+                            <span class="tech-tag">JavaScript</span>
+                        </div>
+                        <div class="project-links">
+                            <a href="lotto.html" class="project-link" target="_blank"><i class="fas fa-external-link-alt"></i> 데모</a>
+                            <a href="lotto.html" class="project-link" target="_blank"><i class="fas fa-code"></i> 코드</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="project-card">
+                    <div class="project-image">
+                        <i class="fas fa-gamepad"></i>
+                    </div>
+                    <div class="project-content">
+                        <h3 class="project-title">블럭 깨기 게임</h3>
+                        <p class="project-description">Canvas를 활용한 클래식 아케이드 게임의 모던한 구현</p>
+                        <div class="project-tech">
+                            <span class="tech-tag">Canvas API</span>
+                            <span class="tech-tag">JavaScript</span>
+                            <span class="tech-tag">CSS3</span>
+                        </div>
+                        <div class="project-links">
+                            <a href="blockbreaker.html" class="project-link" target="_blank"><i class="fas fa-external-link-alt"></i> 데모</a>
+                            <a href="blockbreaker.html" class="project-link" target="_blank"><i class="fas fa-code"></i> 코드</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="skills" class="skills">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">기술 스택</h2>
+                <p class="section-subtitle">제가 사용하는 기술들입니다</p>
+            </div>
+            <div class="skills-content">
+                <div class="skills-category">
+                    <h3 class="category-title">프론트엔드</h3>
+                    <div class="skills-grid">
+                        <div class="skill-item">
+                            <div class="skill-icon">
+                                <i class="fab fa-react"></i>
+                            </div>
+                            <span class="skill-name">React</span>
+                            <div class="skill-bar">
+                                <div class="skill-progress" data-width="90"></div>
+                            </div>
+                        </div>
+                        <div class="skill-item">
+                            <div class="skill-icon">
+                                <i class="fab fa-vuejs"></i>
+                            </div>
+                            <span class="skill-name">Vue.js</span>
+                            <div class="skill-bar">
+                                <div class="skill-progress" data-width="85"></div>
+                            </div>
+                        </div>
+                        <div class="skill-item">
+                            <div class="skill-icon">
+                                <i class="fab fa-js-square"></i>
+                            </div>
+                            <span class="skill-name">JavaScript</span>
+                            <div class="skill-bar">
+                                <div class="skill-progress" data-width="95"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="skills-category">
+                    <h3 class="category-title">백엔드</h3>
+                    <div class="skills-grid">
+                        <div class="skill-item">
+                            <div class="skill-icon">
+                                <i class="fab fa-node-js"></i>
+                            </div>
+                            <span class="skill-name">Node.js</span>
+                            <div class="skill-bar">
+                                <div class="skill-progress" data-width="88"></div>
+                            </div>
+                        </div>
+                        <div class="skill-item">
+                            <div class="skill-icon">
+                                <i class="fab fa-python"></i>
+                            </div>
+                            <span class="skill-name">Python</span>
+                            <div class="skill-bar">
+                                <div class="skill-progress" data-width="80"></div>
+                            </div>
+                        </div>
+                        <div class="skill-item">
+                            <div class="skill-icon">
+                                <i class="fas fa-database"></i>
+                            </div>
+                            <span class="skill-name">MongoDB</span>
+                            <div class="skill-bar">
+                                <div class="skill-progress" data-width="75"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact" class="contact">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">연락처</h2>
+                <p class="section-subtitle">프로젝트나 협업에 대해 이야기해요</p>
+            </div>
+            <div class="contact-content">
+                <div class="contact-info">
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <i class="fas fa-envelope"></i>
+                        </div>
+                        <div class="contact-details">
+                            <h4>이메일</h4>
+                            <p>developer@example.com</p>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <i class="fas fa-phone"></i>
+                        </div>
+                        <div class="contact-details">
+                            <h4>전화번호</h4>
+                            <p>+82 10-1234-5678</p>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <i class="fas fa-map-marker-alt"></i>
+                        </div>
+                        <div class="contact-details">
+                            <h4>위치</h4>
+                            <p>서울, 대한민국</p>
+                        </div>
+                    </div>
+                </div>
+                <form class="contact-form">
+                    <div class="form-group">
+                        <input type="text" id="name" name="name" placeholder="이름" required>
+                    </div>
+                    <div class="form-group">
+                        <input type="email" id="email" name="email" placeholder="이메일" required>
+                    </div>
+                    <div class="form-group">
+                        <textarea id="message" name="message" placeholder="메시지" rows="5" required></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary">메시지 보내기</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-text">
+                    <p>&copy; 2024 개발자 포트폴리오. 모든 권리 보유.</p>
+                </div>
+                <div class="social-links">
+                    <a href="#" class="social-link"><i class="fab fa-github"></i></a>
+                    <a href="#" class="social-link"><i class="fab fa-linkedin"></i></a>
+                    <a href="#" class="social-link"><i class="fab fa-twitter"></i></a>
+                    <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
