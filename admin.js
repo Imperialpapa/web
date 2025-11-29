@@ -125,7 +125,10 @@ class AdminMode {
             return;
         }
 
-        // 비밀번호 입력
+        // 블로그 페이지 먼저 열기
+        window.open('https://it-nomad.blogspot.com/', '_blank', 'noopener,noreferrer');
+
+        // 그 다음 비밀번호 입력
         const userPassword = prompt('관리자 비밀번호를 입력하세요:');
 
         if (userPassword === this.password) {
@@ -157,9 +160,6 @@ class AdminMode {
 
         // 편집 가능한 요소들 활성화
         this.makeContentEditable();
-
-        // 블로그 페이지 자동으로 새 창에서 열기
-        window.open('https://it-nomad.blogspot.com/', '_blank', 'noopener,noreferrer');
 
         console.log('관리자 모드가 활성화되었습니다.');
     }
