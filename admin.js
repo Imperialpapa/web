@@ -126,23 +126,16 @@ class AdminMode {
         }
 
         // 블로그 페이지 먼저 열기
-        const blogWindow = window.open('https://it-nomad.blogspot.com/', '_blank');
+        window.open('https://it-nomad.blogspot.com/', '_blank');
 
-        // 블로그 창에 포커스 주기 (새 창이 앞으로 나오도록)
-        if (blogWindow) {
-            blogWindow.focus();
+        // 비밀번호 입력 (즉시 실행)
+        const userPassword = prompt('관리자 비밀번호를 입력하세요:');
+
+        if (userPassword === this.password) {
+            this.enableAdminMode();
+        } else if (userPassword !== null) {
+            alert('비밀번호가 올바르지 않습니다.');
         }
-
-        // 블로그 창이 표시될 시간을 준 후 비밀번호 입력
-        setTimeout(() => {
-            const userPassword = prompt('관리자 비밀번호를 입력하세요:');
-
-            if (userPassword === this.password) {
-                this.enableAdminMode();
-            } else if (userPassword !== null) {
-                alert('비밀번호가 올바르지 않습니다.');
-            }
-        }, 100);
     }
 
     enableAdminMode() {
