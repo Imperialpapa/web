@@ -19,13 +19,13 @@
                 <h2>Portfolio</h2>
             </div>
             <div class="nav-menu" id="nav-menu">
-                <a href="#home" class="nav-link">홈</a>
-                <a href="#about" class="nav-link">소개</a>
-                <a href="#projects" class="nav-link">프로젝트</a>
-                <a href="#skills" class="nav-link">기술</a>
-                <a href="#notices" class="nav-link">공지사항</a>
-                <a href="#guestbook" class="nav-link">방명록</a>
-                <a href="#contact" class="nav-link">연락처</a>
+                <button class="nav-tab active" data-tab="home">홈</button>
+                <button class="nav-tab" data-tab="about">소개</button>
+                <button class="nav-tab" data-tab="projects">프로젝트</button>
+                <button class="nav-tab" data-tab="skills">기술</button>
+                <button class="nav-tab" data-tab="notices">공지사항</button>
+                <button class="nav-tab" data-tab="guestbook">방명록</button>
+                <button class="nav-tab" data-tab="contact">연락처</button>
             </div>
             <div class="visitor-counter">
                 <i class="fas fa-users"></i>
@@ -39,7 +39,10 @@
         </div>
     </nav>
 
-    <section id="home" class="hero">
+    <!-- 탭 컨텐츠 컨테이너 -->
+    <div class="tab-container">
+
+    <section id="home" class="hero tab-content active">
         <!-- 3D 우주 환경 컨테이너 -->
         <div class="space-container">
             <!-- 3D 별 필드 레이어들 -->
@@ -143,12 +146,9 @@
                 </div>
             </div>
         </div>
-        <div class="scroll-indicator">
-            <div class="scroll-arrow"></div>
-        </div>
     </section>
 
-    <section id="about" class="about">
+    <section id="about" class="about tab-content">
         <div class="container">
             <div class="section-header">
                 <h2 class="section-title">소개</h2>
@@ -182,7 +182,7 @@
         </div>
     </section>
 
-    <section id="projects" class="projects">
+    <section id="projects" class="projects tab-content">
         <div class="container">
             <div class="section-header">
                 <h2 class="section-title">프로젝트</h2>
@@ -268,7 +268,7 @@
         </div>
     </section>
 
-    <section id="skills" class="skills">
+    <section id="skills" class="skills tab-content">
         <div class="container">
             <div class="section-header">
                 <h2 class="section-title">기술 스택</h2>
@@ -344,7 +344,7 @@
         </div>
     </section>
 
-    <section id="notices" class="notices">
+    <section id="notices" class="notices tab-content">
         <div class="container">
             <div class="section-header">
                 <h2 class="section-title">공지사항</h2>
@@ -358,7 +358,7 @@
         </div>
     </section>
 
-    <section id="guestbook" class="guestbook">
+    <section id="guestbook" class="guestbook tab-content">
         <div class="container">
             <div class="section-header">
                 <h2 class="section-title">방명록</h2>
@@ -397,7 +397,7 @@
         </div>
     </section>
 
-    <section id="contact" class="contact">
+    <section id="contact" class="contact tab-content">
         <div class="container">
             <div class="section-header">
                 <h2 class="section-title">연락처</h2>
@@ -448,6 +448,8 @@
             </div>
         </div>
     </section>
+
+    </div><!-- tab-container 끝 -->
 
     <footer class="footer">
         <div class="container">

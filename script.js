@@ -157,20 +157,51 @@ document.addEventListener('DOMContentLoaded', function() {
     // DOM 요소 캐싱 (성능 최적화)
     const navToggle = document.getElementById('nav-toggle');
     const navMenu = document.getElementById('nav-menu');
-    const navLinks = document.querySelectorAll('.nav-link');
-    const sections = document.querySelectorAll('section[id]');
+    const navTabs = document.querySelectorAll('.nav-tab');
+    const tabContents = document.querySelectorAll('.tab-content');
     const navbar = document.querySelector('.navbar');
     const contactForm = document.querySelector('.contact-form');
     const projectCards = document.querySelectorAll('.project-card');
     const skillBars = document.querySelectorAll('.skill-progress');
     const animatedElements = document.querySelectorAll('.fade-in, .slide-in-left, .slide-in-right');
 
-    // 네비게이션 링크 맵 캐싱 (스크롤 이벤트 최적화)
-    const navLinkMap = new Map();
-    sections.forEach(section => {
-        const sectionId = section.getAttribute('id');
-        const link = document.querySelector(`.nav-menu a[href="#${sectionId}"]`);
-        if (link) navLinkMap.set(sectionId, link);
+    // 탭 전환 함수
+    function switchTab(tabName) {
+        // 모든 탭 비활성화
+        navTabs.forEach(tab => tab.classList.remove('active'));
+        tabContents.forEach(content => content.classList.remove('active'));
+
+        // 선택한 탭 활성화
+        const selectedTab = document.querySelector(`.nav-tab[data-tab="${tabName}"]`);
+        const selectedContent = document.getElementById(tabName);
+
+        if (selectedTab && selectedContent) {
+            selectedTab.classList.add('active');
+            selectedContent.classList.add('active');
+
+            // 탭 컨테이너를 맨 위로 스크롤
+            const tabContainer = document.querySelector('.tab-container');
+            if (tabContainer) {
+                tabContainer.scrollTop = 0;
+            }
+
+            // 스킬 섹션이면 스킬 바 애니메이션 시작
+            if (tabName === 'skills') {
+                setTimeout(animateSkillBars, 300);
+            }
+        }
+    }
+
+    // 탭 클릭 이벤트
+    navTabs.forEach(tab => {
+        tab.addEventListener('click', function() {
+            const tabName = this.getAttribute('data-tab');
+            switchTab(tabName);
+
+            // 모바일 메뉴 닫기
+            navMenu.classList.remove('active');
+            navToggle.classList.remove('active');
+        });
     });
 
     // 모바일 메뉴 토글
@@ -179,30 +210,7 @@ document.addEventListener('DOMContentLoaded', function() {
         navToggle.classList.toggle('active');
     });
 
-    // 네비게이션 링크 클릭 시 메뉴 닫기
-    navLinks.forEach(link => {
-        link.addEventListener('click', function() {
-            navMenu.classList.remove('active');
-            navToggle.classList.remove('active');
-        });
-    });
-
-    // 스크롤 네비게이션 (캐시된 맵 사용)
-    function scrollActive() {
-        const scrollY = window.pageYOffset;
-
-        sections.forEach(current => {
-            const sectionHeight = current.offsetHeight;
-            const sectionTop = current.offsetTop - 50;
-            const sectionId = current.getAttribute('id');
-
-            if (scrollY > sectionTop && scrollY <= sectionTop + sectionHeight) {
-                navLinks.forEach(link => link.classList.remove('active'));
-                const navLink = navLinkMap.get(sectionId);
-                if (navLink) navLink.classList.add('active');
-            }
-        });
-    }
+    // 탭 방식이므로 스크롤 네비게이션 비활성화
 
     // 스킬 바 애니메이션 (캐시된 요소 사용)
     function animateSkillBars() {
@@ -242,22 +250,7 @@ document.addEventListener('DOMContentLoaded', function() {
         observer.observe(section);
     });
 
-    // 부드러운 스크롤
-    document.querySelectorAll('a[href^="#"]').forEach(link => {
-        link.addEventListener('click', function(e) {
-            e.preventDefault();
-            const targetId = this.getAttribute('href').substring(1);
-            const targetSection = document.getElementById(targetId);
-
-            if (targetSection) {
-                const offsetTop = targetSection.offsetTop - 70;
-                window.scrollTo({
-                    top: offsetTop,
-                    behavior: 'smooth'
-                });
-            }
-        });
-    });
+    // 탭 방식이므로 부드러운 스크롤 비활성화
 
     // 히어로 섹션 애니메이션
     setTimeout(() => {
@@ -407,21 +400,5 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
 
-    // 성능 최적화: 스크롤 이벤트 throttling
-    function throttle(func, limit) {
-        let inThrottle;
-        return function(...args) {
-            if (!inThrottle) {
-                func.apply(this, args);
-                inThrottle = true;
-                setTimeout(() => inThrottle = false, limit);
-            }
-        };
-    }
-
-    // 스크롤 이벤트 (단일 throttled 리스너로 통합)
-    window.addEventListener('scroll', throttle(function() {
-        scrollActive();
-        handleNavbarScroll();
-    }, 100));
+    // 탭 방식이므로 스크롤 이벤트 비활성화
 });

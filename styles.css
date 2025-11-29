@@ -23,16 +23,48 @@ body {
     line-height: 1.6;
     color: var(--text-color);
     overflow-x: hidden;
+    overflow-y: hidden;
 }
 
 html {
     scroll-behavior: smooth;
+    height: 100%;
+    overflow: hidden;
 }
 
 .container {
     max-width: 1200px;
     margin: 0 auto;
     padding: 0 20px;
+}
+
+/* ==================== 탭 컨테이너 ==================== */
+.tab-container {
+    margin-top: 70px;
+    height: calc(100vh - 70px);
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+
+/* 탭 컨텐츠 */
+.tab-content {
+    display: none;
+    animation: fadeIn 0.4s ease-in-out;
+}
+
+.tab-content.active {
+    display: block;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 
 /* Navigation */
@@ -66,34 +98,43 @@ html {
 
 .nav-menu {
     display: flex;
-    gap: 2rem;
+    gap: 0.5rem;
 }
 
-.nav-link {
-    text-decoration: none;
+/* 탭 버튼 스타일 */
+.nav-tab {
+    background: none;
+    border: none;
+    padding: 0.75rem 1.5rem;
     color: var(--text-color);
     font-weight: 500;
+    font-size: 1rem;
+    font-family: 'Inter', sans-serif;
+    cursor: pointer;
     transition: all 0.3s ease;
     position: relative;
+    border-radius: 8px 8px 0 0;
 }
 
-.nav-link:hover {
+.nav-tab:hover {
     color: var(--primary-color);
+    background: rgba(102, 126, 234, 0.1);
 }
 
-.nav-link::after {
+.nav-tab.active {
+    color: var(--primary-color);
+    background: white;
+    font-weight: 600;
+}
+
+.nav-tab.active::after {
     content: '';
     position: absolute;
-    bottom: -5px;
+    bottom: 0;
     left: 0;
-    width: 0;
-    height: 2px;
-    background: var(--gradient);
-    transition: width 0.3s ease;
-}
-
-.nav-link:hover::after {
     width: 100%;
+    height: 3px;
+    background: var(--gradient);
 }
 
 .nav-toggle {
@@ -112,12 +153,11 @@ html {
 
 /* Hero Section */
 .hero {
-    min-height: 100vh;
+    min-height: calc(100vh - 70px);
     display: flex;
     align-items: center;
     background: radial-gradient(ellipse at center, #0c0e27 0%, #000814 70%, #000000 100%);
     position: relative;
-    padding-top: 80px;
     overflow: hidden;
     perspective: 2000px;
     perspective-origin: center center;
@@ -1051,11 +1091,26 @@ html {
         text-align: center;
         transition: 0.3s;
         box-shadow: var(--shadow);
-        padding: 2rem 0;
+        padding: 1rem 0;
+        gap: 0;
+        z-index: 999;
     }
 
     .nav-menu.active {
         left: 0;
+    }
+
+    .nav-tab {
+        width: 100%;
+        padding: 1rem;
+        border-radius: 0;
+        text-align: center;
+    }
+
+    .nav-tab.active::after {
+        left: 50%;
+        transform: translateX(-50%);
+        width: 50%;
     }
 
     .nav-toggle {
