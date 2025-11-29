@@ -23,7 +23,13 @@
                 <a href="#about" class="nav-link">소개</a>
                 <a href="#projects" class="nav-link">프로젝트</a>
                 <a href="#skills" class="nav-link">기술</a>
+                <a href="#notices" class="nav-link">공지사항</a>
+                <a href="#guestbook" class="nav-link">방명록</a>
                 <a href="#contact" class="nav-link">연락처</a>
+            </div>
+            <div class="visitor-counter">
+                <i class="fas fa-users"></i>
+                <span id="visitor-count">0</span>
             </div>
             <div class="nav-toggle" id="nav-toggle">
                 <span class="bar"></span>
@@ -338,6 +344,59 @@
         </div>
     </section>
 
+    <section id="notices" class="notices">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">공지사항</h2>
+                <p class="section-subtitle">중요한 소식을 확인하세요</p>
+            </div>
+            <div class="notices-content">
+                <div id="notice-list" class="notice-list">
+                    <div class="empty-notice">등록된 공지사항이 없습니다.</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="guestbook" class="guestbook">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">방명록</h2>
+                <p class="section-subtitle">방문 기록을 남겨주세요</p>
+            </div>
+            <div class="guestbook-content">
+                <form id="guest-post-form" class="guest-post-form">
+                    <div class="form-group">
+                        <input
+                            type="text"
+                            id="guest-author"
+                            name="author"
+                            placeholder="이름 (선택사항)"
+                            maxlength="20"
+                        >
+                    </div>
+                    <div class="form-group">
+                        <textarea
+                            id="guest-content"
+                            name="content"
+                            placeholder="방문 기록을 남겨주세요..."
+                            rows="4"
+                            required
+                            maxlength="500"
+                        ></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary">
+                        <i class="fas fa-paper-plane"></i> 등록하기
+                    </button>
+                </form>
+
+                <div id="guest-post-list" class="guest-post-list">
+                    <div class="empty-posts">첫 번째 방문 기록을 남겨주세요!</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <section id="contact" class="contact">
         <div class="container">
             <div class="section-header">
@@ -406,6 +465,22 @@
         </div>
     </footer>
 
+    <!-- Firebase SDK (Firebase 사용 시) -->
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-database-compat.js"></script>
+
+    <!-- Supabase SDK (Supabase 사용 시) -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+    <!-- 백엔드 설정 및 어댑터 -->
+    <script src="backend-config.js"></script>
+    <script src="firebase-config.js"></script>
+    <script src="supabase-config.js"></script>
+    <script src="firebase-adapter.js"></script>
+    <script src="supabase-adapter.js"></script>
+
+    <!-- 애플리케이션 스크립트 -->
+    <script src="board.js"></script>
     <script src="script.js" defer></script>
     <script src="admin.js" defer></script>
 </body>

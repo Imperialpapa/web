@@ -1418,6 +1418,16 @@ html {
     box-shadow: 0 6px 16px rgba(46, 164, 79, 0.4);
 }
 
+.admin-btn-notice {
+    background: linear-gradient(135deg, #f093fb, #f5576c);
+    box-shadow: 0 4px 12px rgba(240, 147, 251, 0.3);
+}
+
+.admin-btn-notice:hover {
+    background: linear-gradient(135deg, #f5576c, #f093fb);
+    box-shadow: 0 6px 16px rgba(245, 87, 108, 0.4);
+}
+
 .admin-btn-secondary {
     background: linear-gradient(135deg, #6b7280, #4b5563);
     box-shadow: 0 4px 12px rgba(107, 114, 128, 0.3);
@@ -1534,5 +1544,267 @@ html {
         width: 50px;
         height: 50px;
         font-size: 20px;
+    }
+}
+
+/* ==================== 방문자 카운터 ==================== */
+.visitor-counter {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.5rem 1rem;
+    background: var(--gradient);
+    color: white;
+    border-radius: 25px;
+    font-weight: 600;
+    font-size: 0.9rem;
+    box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+    animation: pulse 2s infinite;
+}
+
+.visitor-counter i {
+    font-size: 1rem;
+}
+
+@keyframes pulse {
+    0%, 100% {
+        box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+    }
+    50% {
+        box-shadow: 0 4px 20px rgba(102, 126, 234, 0.5);
+    }
+}
+
+/* ==================== 공지사항 섹션 ==================== */
+.notices {
+    padding: 5rem 0;
+    background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+}
+
+.notices-content {
+    margin-top: 3rem;
+}
+
+.notice-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+.notice-item {
+    background: white;
+    padding: 2rem;
+    border-radius: 15px;
+    box-shadow: var(--shadow);
+    transition: all 0.3s ease;
+    position: relative;
+    border-left: 4px solid var(--primary-color);
+}
+
+.notice-item:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-hover);
+}
+
+.notice-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 1rem;
+    gap: 1rem;
+}
+
+.notice-title {
+    font-size: 1.3rem;
+    color: var(--dark-color);
+    font-weight: 600;
+    flex: 1;
+}
+
+.notice-date {
+    font-size: 0.85rem;
+    color: #999;
+    white-space: nowrap;
+}
+
+.notice-content {
+    color: var(--text-color);
+    line-height: 1.8;
+    font-size: 1rem;
+}
+
+.notice-badge {
+    display: inline-block;
+    background: var(--gradient);
+    color: white;
+    padding: 0.3rem 0.8rem;
+    border-radius: 20px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    margin-top: 1rem;
+}
+
+.empty-notice {
+    text-align: center;
+    padding: 3rem;
+    color: #999;
+    font-size: 1.1rem;
+    background: white;
+    border-radius: 15px;
+    box-shadow: var(--shadow);
+}
+
+/* ==================== 방명록 섹션 ==================== */
+.guestbook {
+    padding: 5rem 0;
+    background: var(--light-color);
+}
+
+.guestbook-content {
+    margin-top: 3rem;
+    max-width: 900px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.guest-post-form {
+    background: white;
+    padding: 2rem;
+    border-radius: 15px;
+    box-shadow: var(--shadow);
+    margin-bottom: 3rem;
+}
+
+.guest-post-form .form-group {
+    margin-bottom: 1rem;
+}
+
+.guest-post-form input,
+.guest-post-form textarea {
+    width: 100%;
+    padding: 1rem;
+    border: 2px solid #e2e8f0;
+    border-radius: 10px;
+    font-size: 1rem;
+    font-family: 'Inter', sans-serif;
+    transition: all 0.3s ease;
+    background: var(--light-color);
+}
+
+.guest-post-form input:focus,
+.guest-post-form textarea:focus {
+    outline: none;
+    border-color: var(--primary-color);
+    background: white;
+}
+
+.guest-post-form textarea {
+    resize: vertical;
+    min-height: 120px;
+}
+
+.guest-post-form button {
+    width: 100%;
+    margin-top: 0.5rem;
+}
+
+.guest-post-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.guest-post-item {
+    background: white;
+    padding: 1.5rem;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+    transition: all 0.3s ease;
+    border-left: 3px solid var(--accent-color);
+    animation: fadeInUp 0.5s ease;
+}
+
+.guest-post-item:hover {
+    transform: translateX(5px);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.12);
+}
+
+.post-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+    gap: 1rem;
+}
+
+.post-author {
+    font-weight: 600;
+    color: var(--primary-color);
+    font-size: 1rem;
+}
+
+.post-date {
+    font-size: 0.85rem;
+    color: #999;
+}
+
+.post-content {
+    color: var(--text-color);
+    line-height: 1.7;
+    word-wrap: break-word;
+    white-space: pre-wrap;
+}
+
+.empty-posts {
+    text-align: center;
+    padding: 3rem;
+    color: #999;
+    font-size: 1.1rem;
+    background: white;
+    border-radius: 15px;
+    box-shadow: var(--shadow);
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* ==================== 반응형 - 게시판 ==================== */
+@media (max-width: 768px) {
+    .visitor-counter {
+        display: none;
+    }
+
+    .notice-header {
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+
+    .notice-title {
+        font-size: 1.1rem;
+    }
+
+    .post-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.3rem;
+    }
+
+    .guest-post-form {
+        padding: 1.5rem;
+    }
+
+    .notices,
+    .guestbook {
+        padding: 3rem 0;
     }
 }

@@ -51,6 +51,9 @@ class AdminMode {
                     </div>
 
                     <div class="admin-actions">
+                        <button class="admin-btn admin-btn-notice" id="add-notice">
+                            <i class="fas fa-bullhorn"></i> 공지사항 추가
+                        </button>
                         <button class="admin-btn" id="save-content">
                             <i class="fas fa-save"></i> 변경사항 저장
                         </button>
@@ -116,6 +119,10 @@ class AdminMode {
         // 초기화 버튼
         const resetBtn = document.getElementById('reset-content');
         resetBtn.addEventListener('click', () => this.resetContent());
+
+        // 공지사항 추가 버튼
+        const addNoticeBtn = document.getElementById('add-notice');
+        addNoticeBtn.addEventListener('click', () => this.addNotice());
     }
 
     requestPassword() {
@@ -550,6 +557,42 @@ class AdminMode {
             }
 
             alert(errorMessage);
+        }
+    }
+
+    // 공지사항 추가
+    async addNotice() {
+        if (!this.isAdminMode) {
+            alert('관리자 모드가 활성화되지 않았습니다.');
+            return;
+        }
+
+        // 공지사항 제목 입력
+        const title = prompt('공지사항 제목을 입력하세요:');
+        if (!title || title.trim() === '') {
+            return;
+        }
+
+        // 공지사항 내용 입력
+        const content = prompt('공지사항 내용을 입력하세요:');
+        if (!content || content.trim() === '') {
+            return;
+        }
+
+        // boardManager가 초기화되었는지 확인
+        if (typeof boardManager === 'undefined' || !boardManager) {
+            alert('게시판 시스템이 초기화되지 않았습니다. 페이지를 새로고침하세요.');
+            return;
+        }
+
+        try {
+            const success = await boardManager.addNotice(title, content);
+            if (success) {
+                alert('공지사항이 성공적으로 등록되었습니다!');
+            }
+        } catch (error) {
+            console.error('공지사항 추가 중 오류:', error);
+            alert('공지사항 추가에 실패했습니다.');
         }
     }
 }
