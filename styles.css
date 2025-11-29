@@ -162,11 +162,15 @@ html {
 /* Hero Section */
 .hero {
     min-height: 100%;
-    display: flex;
+    /* display: flex; /* active 상태일 때만 적용되도록 이동 */
     align-items: center;
     background: radial-gradient(ellipse at bottom, var(--dark-color) 0%, #000000 100%);
     position: relative;
     overflow: hidden;
+}
+
+.hero.active {
+    display: flex;
 }
 
 .hero-container {
