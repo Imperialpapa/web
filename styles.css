@@ -5,15 +5,15 @@
 }
 
 :root {
-    --primary-color: #667eea;
-    --secondary-color: #764ba2;
-    --accent-color: #f093fb;
-    --dark-color: #2d3748;
-    --light-color: #f7fafc;
-    --text-color: #4a5568;
+    --primary-color: #8A2BE2; /* 더 생생한 보라색 (BlueViolet) */
+    --secondary-color: #FF1493; /* 딥 핑크 (DeepPink) */
+    --accent-color: #00BFFF;   /* 밝은 하늘색 (DeepSkyBlue) */
+    --dark-color: #1a1a2e;     /* 더 어두운 네이비 배경 */
+    --light-color: #f0f2f5;     /* 살짝 톤 다운된 밝은 색 */
+    --text-color: #333;        /* 기본 텍스트 색상 */
     --white: #ffffff;
     --shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-    --shadow-hover: 0 20px 40px rgba(0, 0, 0, 0.15);
+    --shadow-hover: 0 20px 40px rgba(0, 0, 0, 0.2);
     --gradient: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
     --gradient-accent: linear-gradient(135deg, var(--accent-color), var(--primary-color));
 }
@@ -125,7 +125,7 @@ html {
 
 .nav-tab:hover {
     color: var(--primary-color);
-    background: rgba(102, 126, 234, 0.1);
+    background: rgba(138, 43, 226, 0.1); /* BlueViolet with alpha */
 }
 
 .nav-tab.active {
@@ -163,11 +163,9 @@ html {
     min-height: 100%;
     display: flex;
     align-items: center;
-    background: radial-gradient(ellipse at center, #0c0e27 0%, #000814 70%, #000000 100%);
+    background: radial-gradient(ellipse at bottom, var(--dark-color) 0%, #000000 100%);
     position: relative;
     overflow: hidden;
-    perspective: 2000px;
-    perspective-origin: center center;
 }
 
 .hero-container {
@@ -230,7 +228,7 @@ html {
 
 .btn-secondary {
     background: var(--white);
-    color: var(--text-color);
+    color: var(--primary-color);
     border: 2px solid var(--primary-color);
 }
 
@@ -314,7 +312,7 @@ html {
     position: absolute;
     background: white;
     border-radius: 50%;
-    box-shadow: 0 0 10px white;
+    box-shadow: 0 0 10px white, 0 0 20px var(--accent-color); /* 별에 accent 색상 추가 */
 }
 
 .star-small {
@@ -327,14 +325,14 @@ html {
     width: 2px;
     height: 2px;
     opacity: 0.8;
-    box-shadow: 0 0 15px white;
+    box-shadow: 0 0 15px white, 0 0 25px var(--accent-color);
 }
 
 .star-large {
     width: 3px;
     height: 3px;
     opacity: 1;
-    box-shadow: 0 0 20px white;
+    box-shadow: 0 0 20px white, 0 0 30px var(--accent-color);
     animation: starPulse 3s ease-in-out infinite;
 }
 
@@ -359,11 +357,12 @@ html {
 }
 
 @keyframes spaceRotation {
-    0% { transform: rotateY(0deg) rotateX(0deg); }
-    25% { transform: rotateY(90deg) rotateX(5deg); }
-    50% { transform: rotateY(180deg) rotateX(0deg); }
-    75% { transform: rotateY(270deg) rotateX(-5deg); }
-    100% { transform: rotateY(360deg) rotateX(0deg); }
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
 }
 
 .hero-container {
@@ -399,10 +398,10 @@ html {
 .ufo-body {
     width: 100%;
     height: 60%;
-    background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+    background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
     border-radius: 50%;
     position: relative;
-    box-shadow: 0 0 20px rgba(79, 172, 254, 0.6);
+    box-shadow: 0 0 20px rgba(255, 20, 147, 0.6);
 }
 
 .ufo-dome {
@@ -431,8 +430,8 @@ html {
     width: 6px;
     height: 6px;
     border-radius: 50%;
-    background: #fff;
-    box-shadow: 0 0 10px #fff;
+    background: var(--accent-color);
+    box-shadow: 0 0 10px var(--accent-color);
     animation: blinkLights 1.5s ease-in-out infinite alternate;
 }
 
@@ -448,50 +447,34 @@ html {
 /* 3D UFO 비행 경로 애니메이션 */
 @keyframes ufo3DFlight1 {
     0% { 
-        transform: translateX(-200px) translateY(0) translateZ(-500px) rotateY(-45deg) rotateX(10deg);
+        transform: translate(-100px, 0);
         opacity: 0;
     }
-    10% { opacity: 0.3; }
-    25% { 
-        transform: translateX(20vw) translateY(-50px) translateZ(200px) rotateY(0deg) rotateX(-5deg);
+    20% {
         opacity: 1;
     }
-    50% { 
-        transform: translateX(60vw) translateY(30px) translateZ(-100px) rotateY(30deg) rotateX(15deg);
+    80% {
         opacity: 1;
     }
-    75% { 
-        transform: translateX(90vw) translateY(-20px) translateZ(-300px) rotateY(60deg) rotateX(-10deg);
-        opacity: 0.7;
-    }
-    90% { opacity: 0.3; }
     100% { 
-        transform: translateX(calc(100vw + 200px)) translateY(-80px) translateZ(-600px) rotateY(90deg) rotateX(-20deg);
+        transform: translate(calc(100vw + 100px), -100px);
         opacity: 0;
     }
 }
 
 @keyframes ufo3DFlight2 {
     0% { 
-        transform: translateX(calc(100vw + 150px)) translateY(-30px) translateZ(-400px) rotateY(135deg) rotateX(-15deg);
+        transform: translate(calc(100vw + 100px), 0);
         opacity: 0;
     }
-    15% { opacity: 0.4; }
-    30% { 
-        transform: translateX(70vw) translateY(20px) translateZ(150px) rotateY(180deg) rotateX(5deg);
+    20% {
         opacity: 1;
     }
-    50% { 
-        transform: translateX(30vw) translateY(60px) translateZ(-50px) rotateY(210deg) rotateX(20deg);
+    80% {
         opacity: 1;
     }
-    70% { 
-        transform: translateX(10vw) translateY(10px) translateZ(-250px) rotateY(240deg) rotateX(-8deg);
-        opacity: 0.8;
-    }
-    85% { opacity: 0.4; }
     100% { 
-        transform: translateX(-200px) translateY(100px) translateZ(-500px) rotateY(270deg) rotateX(25deg);
+        transform: translate(-100px, 100px);
         opacity: 0;
     }
 }
@@ -514,10 +497,10 @@ html {
     height: 80px;
     top: 15%;
     right: 20%;
-    background: radial-gradient(circle at 30% 30%, #ff9a9e 0%, #fecfef 50%, #d6336c 100%);
+    background: radial-gradient(circle at 30% 30%, var(--accent-color) 0%, var(--primary-color) 100%);
     box-shadow: 
         inset 10px 10px 20px rgba(0, 0, 0, 0.3),
-        0 0 40px rgba(255, 154, 158, 0.6);
+        0 0 50px var(--primary-color);
     animation: planet3DOrbit1 60s linear infinite;
 }
 
@@ -526,10 +509,10 @@ html {
     height: 50px;
     bottom: 25%;
     left: 15%;
-    background: radial-gradient(circle at 35% 25%, #a8edea 0%, #fed6e3 50%, #2ec4b6 100%);
+    background: radial-gradient(circle at 35% 25%, var(--accent-color) 0%, var(--secondary-color) 100%);
     box-shadow: 
         inset 8px 8px 15px rgba(0, 0, 0, 0.3),
-        0 0 30px rgba(168, 237, 234, 0.6);
+        0 0 50px var(--secondary-color);
     animation: planet3DOrbit2 45s linear infinite;
 }
 
@@ -537,34 +520,37 @@ html {
 
 @keyframes planet3DOrbit1 {
     0% { 
-        transform: rotateY(0deg) rotateX(0deg) translateZ(-200px) rotateZ(0deg);
+        transform: translate(0px, 0px);
     }
     25% { 
-        transform: rotateY(90deg) rotateX(15deg) translateZ(100px) rotateZ(90deg);
+        transform: translate(30px, 50px);
     }
     50% { 
-        transform: rotateY(180deg) rotateX(0deg) translateZ(-200px) rotateZ(180deg);
+        transform: translate(0px, 100px);
     }
     75% { 
-        transform: rotateY(270deg) rotateX(-15deg) translateZ(100px) rotateZ(270deg);
+        transform: translate(-30px, 50px);
     }
     100% { 
-        transform: rotateY(360deg) rotateX(0deg) translateZ(-200px) rotateZ(360deg);
+        transform: translate(0px, 0px);
     }
 }
 
 @keyframes planet3DOrbit2 {
     0% { 
-        transform: rotateY(0deg) rotateX(10deg) translateZ(-150px) rotateZ(0deg);
+        transform: translate(0px, 0px);
     }
-    33% { 
-        transform: rotateY(120deg) rotateX(-10deg) translateZ(200px) rotateZ(120deg);
+    25% { 
+        transform: translate(-40px, -60px);
     }
-    66% { 
-        transform: rotateY(240deg) rotateX(20deg) translateZ(-100px) rotateZ(240deg);
+    50% { 
+        transform: translate(0px, -120px);
+    }
+    75% { 
+        transform: translate(40px, -60px);
     }
     100% { 
-        transform: rotateY(360deg) rotateX(10deg) translateZ(-150px) rotateZ(360deg);
+        transform: translate(0px, 0px);
     }
 }
 
@@ -617,7 +603,7 @@ html {
 /* 히어로 텍스트 색상 조정 */
 .hero-title {
     color: #ffffff;
-    text-shadow: 0 0 20px rgba(102, 126, 234, 0.5);
+    text-shadow: 0 0 20px var(--primary-color);
 }
 
 .hero-description {
@@ -1125,7 +1111,30 @@ html {
 
     .skill-bar {
         width: 100%;
-    }
+.admin-toggle-btn {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background: var(--gradient);
+    border: none;
+    color: white;
+    font-size: 24px;
+    cursor: pointer;
+    box-shadow: 0 8px 20px rgba(138, 43, 226, 0.4); /* New primary color shadow */
+    z-index: 9999;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.admin-toggle-btn:hover {
+    transform: scale(1.1) rotate(10deg);
+    box-shadow: 0 12px 30px rgba(138, 43, 226, 0.6); /* New primary color shadow */
+}
     
     /* 작은 화면에서 추가 최적화 */
     .hero {
@@ -1200,7 +1209,7 @@ html {
     color: white;
     font-size: 24px;
     cursor: pointer;
-    box-shadow: 0 8px 20px rgba(102, 126, 234, 0.4);
+    box-shadow: 0 8px 20px rgba(138, 43, 226, 0.4);
     z-index: 9999;
     transition: all 0.3s ease;
     display: flex;
@@ -1210,7 +1219,7 @@ html {
 
 .admin-toggle-btn:hover {
     transform: scale(1.1) rotate(10deg);
-    box-shadow: 0 12px 30px rgba(102, 126, 234, 0.6);
+    box-shadow: 0 12px 30px rgba(138, 43, 226, 0.6);
 }
 
 .admin-toggle-btn.active {
@@ -1343,12 +1352,12 @@ html {
     gap: 10px;
     background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
     color: white;
-    box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
+    box-shadow: 0 4px 12px rgba(138, 43, 226, 0.3);
 }
 
 .admin-btn:hover {
     transform: translateY(-2px);
-    box-shadow: 0 6px 16px rgba(102, 126, 234, 0.4);
+    box-shadow: 0 6px 16px rgba(138, 43, 226, 0.4);
 }
 
 .admin-btn:active {
@@ -1366,13 +1375,13 @@ html {
 }
 
 .admin-btn-notice {
-    background: linear-gradient(135deg, #f093fb, #f5576c);
-    box-shadow: 0 4px 12px rgba(240, 147, 251, 0.3);
+    background: linear-gradient(135deg, var(--accent-color), var(--secondary-color));
+    box-shadow: 0 4px 12px rgba(0, 191, 255, 0.3);
 }
 
 .admin-btn-notice:hover {
-    background: linear-gradient(135deg, #f5576c, #f093fb);
-    box-shadow: 0 6px 16px rgba(245, 87, 108, 0.4);
+    background: linear-gradient(135deg, var(--secondary-color), var(--accent-color));
+    box-shadow: 0 6px 16px rgba(255, 20, 147, 0.4);
 }
 
 .admin-btn-secondary {
@@ -1423,7 +1432,7 @@ html {
 [contenteditable="true"].editable {
     outline: 2px dashed var(--primary-color);
     outline-offset: 4px;
-    background: rgba(102, 126, 234, 0.05);
+    background: rgba(138, 43, 226, 0.05);
     border-radius: 4px;
     cursor: text;
     transition: all 0.3s ease;
@@ -1431,12 +1440,12 @@ html {
 }
 
 [contenteditable="true"].editable:hover {
-    background: rgba(102, 126, 234, 0.1);
+    background: rgba(138, 43, 226, 0.1);
     outline-color: var(--secondary-color);
 }
 
 [contenteditable="true"].editable:focus {
-    background: rgba(102, 126, 234, 0.15);
+    background: rgba(138, 43, 226, 0.15);
     outline: 2px solid var(--primary-color);
 }
 
@@ -1505,7 +1514,7 @@ html {
     border-radius: 25px;
     font-weight: 600;
     font-size: 0.9rem;
-    box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+    box-shadow: 0 4px 15px rgba(138, 43, 226, 0.3);
     animation: pulse 2s infinite;
 }
 
@@ -1515,10 +1524,10 @@ html {
 
 @keyframes pulse {
     0%, 100% {
-        box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+        box-shadow: 0 4px 15px rgba(138, 43, 226, 0.3);
     }
     50% {
-        box-shadow: 0 4px 20px rgba(102, 126, 234, 0.5);
+        box-shadow: 0 4px 20px rgba(138, 43, 226, 0.5);
     }
 }
 
