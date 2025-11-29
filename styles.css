@@ -23,13 +23,13 @@ body {
     line-height: 1.6;
     color: var(--text-color);
     overflow-x: hidden;
-    overflow-y: hidden;
+    /* overflow-y: hidden; /* 관리자 버튼이 보이도록 제거 */
 }
 
 html {
     scroll-behavior: smooth;
     height: 100%;
-    overflow: hidden;
+    /* overflow: hidden; /* 관리자 버튼이 보이도록 제거 */
 }
 
 .container {
