@@ -165,7 +165,6 @@ html {
     /* display: flex; /* active 상태일 때만 적용되도록 이동 */
     align-items: center;
     background: radial-gradient(ellipse at bottom, var(--dark-color) 0%, #000000 100%);
-    position: relative;
     overflow: hidden;
 }
 
