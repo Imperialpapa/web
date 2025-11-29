@@ -1350,6 +1350,28 @@ html {
     margin: 0;
 }
 
+.github-status {
+    padding: 12px 15px;
+    background: #f9fafb;
+    border-radius: 8px;
+    border-left: 4px solid #6b7280;
+    margin: 15px 0;
+}
+
+.github-status p {
+    margin: 0;
+    font-size: 13px;
+    color: var(--text-color);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.github-status i {
+    font-size: 16px;
+    color: #24292e;
+}
+
 .status-text {
     font-weight: 600;
     color: #ff5722;
@@ -1386,6 +1408,25 @@ html {
     transform: translateY(0);
 }
 
+.admin-btn-github {
+    background: linear-gradient(135deg, #24292e, #1a1e22);
+    box-shadow: 0 4px 12px rgba(36, 41, 46, 0.3);
+}
+
+.admin-btn-github:hover {
+    background: linear-gradient(135deg, #2ea44f, #28a745);
+    box-shadow: 0 6px 16px rgba(46, 164, 79, 0.4);
+}
+
+.admin-btn-secondary {
+    background: linear-gradient(135deg, #6b7280, #4b5563);
+    box-shadow: 0 4px 12px rgba(107, 114, 128, 0.3);
+}
+
+.admin-btn-secondary:hover {
+    box-shadow: 0 6px 16px rgba(107, 114, 128, 0.4);
+}
+
 .admin-btn-danger {
     background: linear-gradient(135deg, #ef4444, #dc2626);
     box-shadow: 0 4px 12px rgba(239, 68, 68, 0.3);
@@ -1393,6 +1434,12 @@ html {
 
 .admin-btn-danger:hover {
     box-shadow: 0 6px 16px rgba(239, 68, 68, 0.4);
+}
+
+.admin-btn:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+    transform: none !important;
 }
 
 .admin-info {

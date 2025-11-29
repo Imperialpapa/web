@@ -4,6 +4,12 @@ class AdminMode {
         this.isAdminMode = false;
         this.password = 'admin12'; // 관리자 비밀번호 (실제 사용 시 더 안전하게 관리해야 함)
         this.contentData = null;
+
+        // GitHub 설정
+        this.githubOwner = 'Imperialpapa';
+        this.githubRepo = 'web';
+        this.githubToken = localStorage.getItem('github_token') || '';
+
         this.init();
     }
 
@@ -38,9 +44,18 @@ class AdminMode {
                 </div>
                 <div class="admin-body">
                     <p class="admin-status">편집 모드가 <span class="status-text">비활성화</span>되었습니다</p>
+
+                    <!-- GitHub 토큰 상태 -->
+                    <div class="github-status" id="github-status">
+                        <p><i class="fab fa-github"></i> <span id="github-token-status">GitHub 토큰 미설정</span></p>
+                    </div>
+
                     <div class="admin-actions">
                         <button class="admin-btn" id="save-content">
                             <i class="fas fa-save"></i> 변경사항 저장
+                        </button>
+                        <button class="admin-btn admin-btn-github" id="deploy-github">
+                            <i class="fab fa-github"></i> GitHub에 자동 배포
                         </button>
                         <button class="admin-btn" id="download-json">
                             <i class="fas fa-download"></i> JSON 다운로드
@@ -49,13 +64,17 @@ class AdminMode {
                             <i class="fas fa-upload"></i> JSON 업로드
                         </button>
                         <input type="file" id="upload-json" accept=".json" style="display: none;">
+                        <button class="admin-btn admin-btn-secondary" id="setup-github-token">
+                            <i class="fas fa-key"></i> GitHub 토큰 설정
+                        </button>
                         <button class="admin-btn admin-btn-danger" id="reset-content">
                             <i class="fas fa-undo"></i> 초기화
                         </button>
                     </div>
                     <div class="admin-info">
                         <p><i class="fas fa-info-circle"></i> 편집 가능한 텍스트를 클릭하여 수정하세요</p>
-                        <p><i class="fas fa-lightbulb"></i> 변경사항을 저장한 후 JSON을 다운로드하세요</p>
+                        <p><i class="fas fa-rocket"></i> 변경사항 저장 후 "GitHub에 자동 배포" 클릭!</p>
+                        <p><i class="fas fa-lightbulb"></i> GitHub 토큰은 한 번만 설정하면 됩니다</p>
                     </div>
                 </div>
             </div>
@@ -75,6 +94,14 @@ class AdminMode {
         // 저장 버튼
         const saveBtn = document.getElementById('save-content');
         saveBtn.addEventListener('click', () => this.saveContent());
+
+        // GitHub 자동 배포 버튼
+        const deployBtn = document.getElementById('deploy-github');
+        deployBtn.addEventListener('click', () => this.deployToGitHub());
+
+        // GitHub 토큰 설정 버튼
+        const tokenBtn = document.getElementById('setup-github-token');
+        tokenBtn.addEventListener('click', () => this.setupGitHubToken());
 
         // JSON 다운로드 버튼
         const downloadBtn = document.getElementById('download-json');
@@ -117,6 +144,9 @@ class AdminMode {
         const statusText = document.querySelector('.status-text');
         statusText.textContent = '활성화';
         statusText.style.color = '#4caf50';
+
+        // GitHub 토큰 상태 업데이트
+        this.updateGitHubTokenStatus();
 
         // 편집 가능한 요소들 활성화
         this.makeContentEditable();
@@ -360,6 +390,152 @@ class AdminMode {
     resetContent() {
         if (confirm('정말로 모든 변경사항을 초기화하시겠습니까?')) {
             location.reload();
+        }
+    }
+
+    // GitHub 토큰 상태 업데이트
+    updateGitHubTokenStatus() {
+        const statusElement = document.getElementById('github-token-status');
+        if (this.githubToken) {
+            statusElement.innerHTML = '<span style="color: #4caf50;">✓ GitHub 토큰 설정됨</span>';
+        } else {
+            statusElement.innerHTML = '<span style="color: #ff5722;">⚠ GitHub 토큰 미설정</span>';
+        }
+    }
+
+    // GitHub 토큰 설정
+    setupGitHubToken() {
+        const instructions = `GitHub Personal Access Token이 필요합니다.
+
+토큰 생성 방법:
+1. GitHub → Settings → Developer settings
+2. Personal access tokens → Tokens (classic)
+3. "Generate new token (classic)" 클릭
+4. Note: "Portfolio Admin" 등 입력
+5. repo 권한 체크
+6. Generate token 클릭
+7. 생성된 토큰 복사
+
+아래에 토큰을 입력하세요:`;
+
+        const token = prompt(instructions);
+
+        if (token && token.trim()) {
+            this.githubToken = token.trim();
+            localStorage.setItem('github_token', this.githubToken);
+            this.updateGitHubTokenStatus();
+            alert('GitHub 토큰이 설정되었습니다!\n이제 "GitHub에 자동 배포" 버튼을 사용할 수 있습니다.');
+        } else if (token !== null) {
+            alert('토큰이 입력되지 않았습니다.');
+        }
+    }
+
+    // GitHub에 자동 배포
+    async deployToGitHub() {
+        // 토큰 확인
+        if (!this.githubToken) {
+            const setup = confirm('GitHub 토큰이 설정되지 않았습니다.\n토큰을 설정하시겠습니까?');
+            if (setup) {
+                this.setupGitHubToken();
+            }
+            return;
+        }
+
+        // 콘텐츠 저장 확인
+        if (!this.contentData) {
+            alert('먼저 "변경사항 저장" 버튼을 클릭하여 변경사항을 저장하세요.');
+            return;
+        }
+
+        if (!confirm('변경사항을 GitHub에 배포하시겠습니까?\n배포 후 1-2분 내에 웹사이트에 반영됩니다.')) {
+            return;
+        }
+
+        try {
+            // 로딩 표시
+            const deployBtn = document.getElementById('deploy-github');
+            const originalText = deployBtn.innerHTML;
+            deployBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> 배포 중...';
+            deployBtn.disabled = true;
+
+            // 1단계: 현재 파일의 SHA 가져오기
+            const fileUrl = `https://api.github.com/repos/${this.githubOwner}/${this.githubRepo}/contents/content.json`;
+
+            const getResponse = await fetch(fileUrl, {
+                headers: {
+                    'Authorization': `token ${this.githubToken}`,
+                    'Accept': 'application/vnd.github.v3+json'
+                }
+            });
+
+            if (!getResponse.ok) {
+                throw new Error(`파일 정보 가져오기 실패: ${getResponse.status} ${getResponse.statusText}`);
+            }
+
+            const fileData = await getResponse.json();
+            const currentSha = fileData.sha;
+
+            // 2단계: 파일 업데이트
+            const contentStr = JSON.stringify(this.contentData, null, 2);
+            const contentBase64 = btoa(unescape(encodeURIComponent(contentStr)));
+
+            const updateResponse = await fetch(fileUrl, {
+                method: 'PUT',
+                headers: {
+                    'Authorization': `token ${this.githubToken}`,
+                    'Accept': 'application/vnd.github.v3+json',
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    message: `Update content.json via admin panel\n\n🤖 Generated with [Claude Code](https://claude.com/claude-code)`,
+                    content: contentBase64,
+                    sha: currentSha,
+                    branch: 'master'
+                })
+            });
+
+            if (!updateResponse.ok) {
+                const errorData = await updateResponse.json();
+                throw new Error(`파일 업데이트 실패: ${updateResponse.status} - ${errorData.message || updateResponse.statusText}`);
+            }
+
+            const result = await updateResponse.json();
+
+            // 성공
+            deployBtn.innerHTML = '<i class="fas fa-check"></i> 배포 완료!';
+            setTimeout(() => {
+                deployBtn.innerHTML = originalText;
+                deployBtn.disabled = false;
+            }, 3000);
+
+            alert(`✅ GitHub에 성공적으로 배포되었습니다!\n\n커밋 SHA: ${result.commit.sha.substring(0, 7)}\n\n1-2분 후 웹사이트가 업데이트됩니다.\n웹사이트: https://${this.githubOwner.toLowerCase()}.github.io/${this.githubRepo}/`);
+
+            console.log('배포 완료:', result);
+
+        } catch (error) {
+            console.error('배포 에러:', error);
+
+            const deployBtn = document.getElementById('deploy-github');
+            deployBtn.innerHTML = '<i class="fas fa-exclamation-triangle"></i> 배포 실패';
+            deployBtn.disabled = false;
+
+            setTimeout(() => {
+                deployBtn.innerHTML = '<i class="fab fa-github"></i> GitHub에 자동 배포';
+            }, 3000);
+
+            let errorMessage = '배포 중 오류가 발생했습니다.\n\n';
+
+            if (error.message.includes('401')) {
+                errorMessage += '❌ 토큰이 유효하지 않습니다.\n"GitHub 토큰 설정"에서 새 토큰을 입력하세요.';
+            } else if (error.message.includes('403')) {
+                errorMessage += '❌ 권한이 없습니다.\n토큰에 "repo" 권한이 있는지 확인하세요.';
+            } else if (error.message.includes('404')) {
+                errorMessage += '❌ 파일 또는 저장소를 찾을 수 없습니다.\n저장소 정보를 확인하세요.';
+            } else {
+                errorMessage += `오류: ${error.message}`;
+            }
+
+            alert(errorMessage);
         }
     }
 }
