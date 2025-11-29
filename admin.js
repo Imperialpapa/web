@@ -158,6 +158,9 @@ class AdminMode {
         // 편집 가능한 요소들 활성화
         this.makeContentEditable();
 
+        // 블로그 페이지 자동으로 새 창에서 열기
+        window.open('https://it-nomad.blogspot.com/', '_blank', 'noopener,noreferrer');
+
         console.log('관리자 모드가 활성화되었습니다.');
     }
 
