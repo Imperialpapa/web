@@ -119,6 +119,13 @@ class AdminMode {
     }
 
     requestPassword() {
+        // 이미 관리자 모드가 활성화되어 있으면 비활성화
+        if (this.isAdminMode) {
+            this.disableAdminMode();
+            return;
+        }
+
+        // 비밀번호 입력
         const userPassword = prompt('관리자 비밀번호를 입력하세요:');
 
         if (userPassword === this.password) {
@@ -166,6 +173,13 @@ class AdminMode {
         toggleBtn.innerHTML = '<i class="fas fa-lock"></i>';
         toggleBtn.classList.remove('active');
 
+        // 상태 텍스트 업데이트
+        const statusText = document.querySelector('.status-text');
+        if (statusText) {
+            statusText.textContent = '비활성화';
+            statusText.style.color = '#ff5722';
+        }
+
         // 편집 불가능하게 변경
         this.makeContentNonEditable();
 
@@ -173,8 +187,8 @@ class AdminMode {
     }
 
     closeAdminPanel() {
-        const panel = document.getElementById('admin-panel');
-        panel.classList.remove('active');
+        // 패널을 닫을 때 관리자 모드도 함께 비활성화
+        this.disableAdminMode();
     }
 
     makeContentEditable() {
