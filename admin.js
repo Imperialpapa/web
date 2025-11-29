@@ -125,10 +125,7 @@ class AdminMode {
             return;
         }
 
-        // 블로그 페이지 먼저 열기
-        window.open('https://it-nomad.blogspot.com/', '_blank');
-
-        // 즉시 비밀번호 입력 (setTimeout 없이 - 사용자 클릭 컨텍스트 유지)
+        // 비밀번호 입력
         const userPassword = prompt('관리자 비밀번호를 입력하세요:');
 
         if (userPassword === this.password) {
