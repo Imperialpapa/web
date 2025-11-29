@@ -179,11 +179,8 @@ document.addEventListener('DOMContentLoaded', function() {
             selectedTab.classList.add('active');
             selectedContent.classList.add('active');
 
-            // 탭 컨테이너를 맨 위로 스크롤
-            const tabContainer = document.querySelector('.tab-container');
-            if (tabContainer) {
-                tabContainer.scrollTop = 0;
-            }
+            // 선택한 탭 컨텐츠를 맨 위로 스크롤
+            selectedContent.scrollTop = 0;
 
             // 스킬 섹션이면 스킬 바 애니메이션 시작
             if (tabName === 'skills') {
