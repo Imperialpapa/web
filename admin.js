@@ -280,7 +280,7 @@ class AdminMode {
         const updatedContent = {
             hero: {
                 title: document.querySelector('.hero-title').innerHTML,
-                description: document.querySelector('.hero-description').textContent,
+                description: document.querySelector('.hero-description').innerHTML, // HTML 링크 지원
                 primaryButton: document.querySelector('.hero-buttons .btn-primary').textContent,
                 secondaryButton: document.querySelector('.hero-buttons .btn-secondary').textContent
             },

@@ -1,7 +1,7 @@
 {
   "hero": {
-    "title": "안녕하세요, <span class=\"highlight\">풀스택 개발자</span> 입니다.",
-    "description": "창의적이고 효율적인 웹 솔루션을 만들어내는 열정적인 개발자입니다.",
+    "title": "안녕하세요, <span class=\"highlight\">놀개미 서비스 페이지</span> 입니다.",
+    "description": "창의적이고 효율적인 웹 솔루션을 만들어내는 열정적인 개발자입니다. <a href=\"https://it-nomad.blogspot.com/\" target=\"_blank\" rel=\"noopener noreferrer\" style=\"color: var(--primary-color); text-decoration: underline;\">블로그 방문하기</a>",
     "primaryButton": "프로젝트 보기",
     "secondaryButton": "연락하기"
   },

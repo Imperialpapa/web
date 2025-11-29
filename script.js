@@ -19,7 +19,7 @@ function applyContent(content) {
         const heroSecondaryBtn = document.querySelector('.hero-buttons .btn-secondary');
 
         if (heroTitle) heroTitle.innerHTML = content.hero.title;
-        if (heroDesc) heroDesc.textContent = content.hero.description;
+        if (heroDesc) heroDesc.innerHTML = content.hero.description; // HTML 링크 지원을 위해 innerHTML 사용
         if (heroPrimaryBtn) heroPrimaryBtn.textContent = content.hero.primaryButton;
         if (heroSecondaryBtn) heroSecondaryBtn.textContent = content.hero.secondaryButton;
     }
