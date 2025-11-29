@@ -40,8 +40,8 @@ html {
 
 /* ==================== 탭 컨테이너 ==================== */
 .tab-container {
-    margin-top: 70px;
-    height: calc(100vh - 70px);
+    margin-top: 80px; /* 상단 내비게이션 바와의 겹침 방지 */
+    height: calc(100vh - 80px);
     position: relative;
     overflow: hidden;
 }
