@@ -234,8 +234,7 @@ class BoardManager {
             title: title.trim(),
             content: content.trim(),
             timestamp: Date.now(),
-            is_admin: true,
-            isAdmin: true // Firebase 호환성
+            is_admin: true
         };
 
         console.log('📢 [BoardManager] 생성된 notice 객체:', notice);
