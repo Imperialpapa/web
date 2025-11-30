@@ -138,12 +138,16 @@ class SupabaseAdapter {
     async addNotice(notice) {
         try {
             console.log('🔵 [Supabase] addNotice 호출됨');
-            console.log('🔵 [Supabase] 저장할 데이터:', notice);
+            console.log('🔵 [Supabase] 저장할 데이터 (원본):', notice);
+
+            // Supabase용 데이터 준비 (isAdmin 제거, is_admin만 사용)
+            const { isAdmin, ...supabaseNotice } = notice;
+            console.log('🔵 [Supabase] 저장할 데이터 (정제):', supabaseNotice);
             console.log('🔵 [Supabase] 대상 테이블: notices');
 
             const { data, error } = await this.client
                 .from('notices')
-                .insert([notice])
+                .insert([supabaseNotice])
                 .select();
 
             if (error) {
