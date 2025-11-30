@@ -198,6 +198,24 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
 
+    // 홈의 "프로젝트 보기" 버튼 - 프로젝트 탭으로 이동
+    const projectViewBtn = document.querySelector('.hero-buttons .btn-primary');
+    if (projectViewBtn) {
+        projectViewBtn.addEventListener('click', function(e) {
+            e.preventDefault();
+            switchTab('projects');
+        });
+    }
+
+    // 홈의 "연락하기" 버튼 - 연락처 탭으로 이동
+    const contactBtn = document.querySelector('.hero-buttons .btn-secondary');
+    if (contactBtn) {
+        contactBtn.addEventListener('click', function(e) {
+            e.preventDefault();
+            switchTab('contact');
+        });
+    }
+
     // 모바일 메뉴 토글
     navToggle.addEventListener('click', function() {
         navMenu.classList.toggle('active');
