@@ -165,6 +165,12 @@ class AdminMode {
         // 편집 가능한 요소들 활성화
         this.makeContentEditable();
 
+        // 공지사항과 방명록 다시 렌더링 (관리자 버튼 표시)
+        if (window.boardManager) {
+            window.boardManager.renderNotices();
+            window.boardManager.renderGuestPosts();
+        }
+
         console.log('관리자 모드가 활성화되었습니다.');
     }
 
@@ -189,6 +195,12 @@ class AdminMode {
 
         // 편집 불가능하게 변경
         this.makeContentNonEditable();
+
+        // 공지사항과 방명록 다시 렌더링 (관리자 버튼 제거)
+        if (window.boardManager) {
+            window.boardManager.renderNotices();
+            window.boardManager.renderGuestPosts();
+        }
 
         console.log('관리자 모드가 비활성화되었습니다.');
     }

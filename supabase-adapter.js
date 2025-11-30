@@ -159,18 +159,51 @@ class SupabaseAdapter {
         }
     }
 
+    // 공지사항 수정
+    async updateNotice(noticeId, updates) {
+        try {
+            console.log('🔵 [Supabase] updateNotice 호출됨');
+            console.log('🔵 [Supabase] 수정할 ID:', noticeId);
+            console.log('🔵 [Supabase] 수정할 데이터:', updates);
+
+            const { data, error } = await this.client
+                .from('notices')
+                .update(updates)
+                .eq('id', noticeId)
+                .select();
+
+            if (error) {
+                console.error('🔴 [Supabase] 공지사항 수정 실패:', error);
+                throw error;
+            }
+
+            console.log('✅ [Supabase] 공지사항 수정 성공:', data);
+            return true;
+        } catch (error) {
+            console.error('🔴 [Supabase] 공지사항 수정 실패:', error);
+            throw error;
+        }
+    }
+
     // 공지사항 삭제
     async deleteNotice(noticeId) {
         try {
+            console.log('🔵 [Supabase] deleteNotice 호출됨, ID:', noticeId);
+
             const { error } = await this.client
                 .from('notices')
                 .delete()
                 .eq('id', noticeId);
 
-            if (error) throw error;
+            if (error) {
+                console.error('🔴 [Supabase] 공지사항 삭제 실패:', error);
+                throw error;
+            }
+
+            console.log('✅ [Supabase] 공지사항 삭제 성공');
             return true;
         } catch (error) {
-            console.error('공지사항 삭제 실패:', error);
+            console.error('🔴 [Supabase] 공지사항 삭제 실패:', error);
             throw error;
         }
     }
@@ -242,6 +275,29 @@ class SupabaseAdapter {
             return true;
         } catch (error) {
             console.error('🔴 [Supabase] 방문자 글 추가 실패:', error);
+            throw error;
+        }
+    }
+
+    // 방문자 글 삭제
+    async deleteGuestPost(postId) {
+        try {
+            console.log('🟢 [Supabase] deleteGuestPost 호출됨, ID:', postId);
+
+            const { error } = await this.client
+                .from('guest_posts')
+                .delete()
+                .eq('id', postId);
+
+            if (error) {
+                console.error('🔴 [Supabase] 방문자 글 삭제 실패:', error);
+                throw error;
+            }
+
+            console.log('✅ [Supabase] 방명록 글 삭제 성공');
+            return true;
+        } catch (error) {
+            console.error('🔴 [Supabase] 방명록 글 삭제 실패:', error);
             throw error;
         }
     }

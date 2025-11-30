@@ -1560,10 +1560,47 @@ html {
     flex: 1;
 }
 
+.notice-meta {
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+}
+
 .notice-date {
     font-size: 0.85rem;
     color: #999;
     white-space: nowrap;
+}
+
+.admin-actions {
+    display: flex;
+    gap: 0.5rem;
+}
+
+.admin-action-btn {
+    background: transparent;
+    border: none;
+    color: #999;
+    cursor: pointer;
+    padding: 0.4rem 0.6rem;
+    border-radius: 6px;
+    transition: all 0.2s ease;
+    font-size: 0.9rem;
+}
+
+.admin-action-btn:hover {
+    background: #f7fafc;
+    color: var(--primary-color);
+    transform: scale(1.1);
+}
+
+.admin-action-btn.edit-notice-btn:hover {
+    color: #3182ce;
+}
+
+.admin-action-btn.delete-notice-btn:hover,
+.admin-action-btn.delete-post-btn:hover {
+    color: #e53e3e;
 }
 
 .notice-content {
@@ -1680,6 +1717,12 @@ html {
     font-weight: 600;
     color: var(--primary-color);
     font-size: 1rem;
+}
+
+.post-meta {
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
 }
 
 .post-date {

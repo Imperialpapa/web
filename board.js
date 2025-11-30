@@ -155,16 +155,36 @@ class BoardManager {
             return;
         }
 
+        // 관리자 모드 여부 확인
+        const isAdminMode = window.adminMode && window.adminMode.isAdminMode;
+
         noticeList.innerHTML = this.notices.map(notice => `
             <div class="notice-item" data-id="${notice.id || ''}">
                 <div class="notice-header">
                     <h4 class="notice-title">${this.escapeHtml(notice.title)}</h4>
-                    <span class="notice-date">${this.formatDate(notice.timestamp)}</span>
+                    <div class="notice-meta">
+                        <span class="notice-date">${this.formatDate(notice.timestamp)}</span>
+                        ${isAdminMode ? `
+                            <div class="admin-actions">
+                                <button class="admin-action-btn edit-notice-btn" data-id="${notice.id}" title="수정">
+                                    <i class="fas fa-edit"></i>
+                                </button>
+                                <button class="admin-action-btn delete-notice-btn" data-id="${notice.id}" title="삭제">
+                                    <i class="fas fa-trash"></i>
+                                </button>
+                            </div>
+                        ` : ''}
+                    </div>
                 </div>
                 <div class="notice-content">${this.escapeHtml(notice.content)}</div>
                 ${notice.isAdmin || notice.is_admin ? '<span class="notice-badge">관리자</span>' : ''}
             </div>
         `).join('');
+
+        // 관리자 모드일 때 이벤트 리스너 추가
+        if (isAdminMode) {
+            this.attachNoticeAdminButtons();
+        }
     }
 
     // 방문자 게시판 렌더링
@@ -177,15 +197,68 @@ class BoardManager {
             return;
         }
 
+        // 관리자 모드 여부 확인
+        const isAdminMode = window.adminMode && window.adminMode.isAdminMode;
+
         postList.innerHTML = this.guestPosts.map(post => `
             <div class="guest-post-item" data-id="${post.id || ''}">
                 <div class="post-header">
                     <span class="post-author">${this.escapeHtml(post.author || '익명')}</span>
-                    <span class="post-date">${this.formatDate(post.timestamp)}</span>
+                    <div class="post-meta">
+                        <span class="post-date">${this.formatDate(post.timestamp)}</span>
+                        ${isAdminMode ? `
+                            <button class="admin-action-btn delete-post-btn" data-id="${post.id}" title="삭제">
+                                <i class="fas fa-trash"></i>
+                            </button>
+                        ` : ''}
+                    </div>
                 </div>
                 <div class="post-content">${this.escapeHtml(post.content)}</div>
             </div>
         `).join('');
+
+        // 관리자 모드일 때 이벤트 리스너 추가
+        if (isAdminMode) {
+            this.attachGuestPostAdminButtons();
+        }
+    }
+
+    // 공지사항 관리자 버튼 이벤트 연결
+    attachNoticeAdminButtons() {
+        // 수정 버튼
+        document.querySelectorAll('.edit-notice-btn').forEach(btn => {
+            btn.addEventListener('click', async (e) => {
+                const noticeId = e.currentTarget.getAttribute('data-id');
+                const notice = this.notices.find(n => n.id == noticeId);
+                if (!notice) return;
+
+                const newTitle = prompt('공지사항 제목을 입력하세요:', notice.title);
+                if (!newTitle || newTitle.trim() === '') return;
+
+                const newContent = prompt('공지사항 내용을 입력하세요:', notice.content);
+                if (!newContent || newContent.trim() === '') return;
+
+                await this.updateNotice(noticeId, newTitle, newContent);
+            });
+        });
+
+        // 삭제 버튼
+        document.querySelectorAll('.delete-notice-btn').forEach(btn => {
+            btn.addEventListener('click', async (e) => {
+                const noticeId = e.currentTarget.getAttribute('data-id');
+                await this.deleteNotice(noticeId);
+            });
+        });
+    }
+
+    // 방명록 관리자 버튼 이벤트 연결
+    attachGuestPostAdminButtons() {
+        document.querySelectorAll('.delete-post-btn').forEach(btn => {
+            btn.addEventListener('click', async (e) => {
+                const postId = e.currentTarget.getAttribute('data-id');
+                await this.deleteGuestPost(postId);
+            });
+        });
     }
 
     // 방문자 글 작성
@@ -260,9 +333,52 @@ class BoardManager {
         }
     }
 
+    // 공지사항 수정 (관리자 전용)
+    async updateNotice(noticeId, title, content) {
+        console.log('📢 [BoardManager] updateNotice 호출됨', noticeId);
+
+        if (!noticeId || !title || !content) {
+            alert('제목과 내용을 모두 입력해주세요.');
+            return false;
+        }
+
+        const updates = {
+            title: title.trim(),
+            content: content.trim()
+        };
+
+        if (!this.isInitialized) {
+            // localStorage에서 수정
+            const index = this.notices.findIndex(n => n.id === noticeId);
+            if (index !== -1) {
+                this.notices[index] = { ...this.notices[index], ...updates };
+                localStorage.setItem('notices', JSON.stringify(this.notices));
+                this.renderNotices();
+            }
+            return true;
+        }
+
+        try {
+            console.log('📢 [BoardManager] backend.updateNotice() 호출');
+            await this.backend.updateNotice(noticeId, updates);
+            console.log('✅ [BoardManager] 공지사항 수정 성공');
+            return true;
+        } catch (error) {
+            console.error('🔴 [BoardManager] 공지사항 수정 실패:', error);
+            alert('공지사항 수정에 실패했습니다.');
+            return false;
+        }
+    }
+
     // 공지사항 삭제 (관리자 전용)
     async deleteNotice(noticeId) {
+        console.log('📢 [BoardManager] deleteNotice 호출됨', noticeId);
+
         if (!noticeId) return false;
+
+        if (!confirm('정말로 이 공지사항을 삭제하시겠습니까?')) {
+            return false;
+        }
 
         if (!this.isInitialized) {
             // localStorage에서 삭제
@@ -273,10 +389,43 @@ class BoardManager {
         }
 
         try {
+            console.log('📢 [BoardManager] backend.deleteNotice() 호출');
             await this.backend.deleteNotice(noticeId);
+            console.log('✅ [BoardManager] 공지사항 삭제 성공');
             return true;
         } catch (error) {
-            console.error('공지사항 삭제 실패:', error);
+            console.error('🔴 [BoardManager] 공지사항 삭제 실패:', error);
+            alert('공지사항 삭제에 실패했습니다.');
+            return false;
+        }
+    }
+
+    // 방명록 글 삭제 (관리자 전용)
+    async deleteGuestPost(postId) {
+        console.log('📢 [BoardManager] deleteGuestPost 호출됨', postId);
+
+        if (!postId) return false;
+
+        if (!confirm('정말로 이 방명록 글을 삭제하시겠습니까?')) {
+            return false;
+        }
+
+        if (!this.isInitialized) {
+            // localStorage에서 삭제
+            this.guestPosts = this.guestPosts.filter(p => p.id !== postId);
+            localStorage.setItem('guestPosts', JSON.stringify(this.guestPosts));
+            this.renderGuestPosts();
+            return true;
+        }
+
+        try {
+            console.log('📢 [BoardManager] backend.deleteGuestPost() 호출');
+            await this.backend.deleteGuestPost(postId);
+            console.log('✅ [BoardManager] 방명록 글 삭제 성공');
+            return true;
+        } catch (error) {
+            console.error('🔴 [BoardManager] 방명록 글 삭제 실패:', error);
+            alert('방명록 글 삭제에 실패했습니다.');
             return false;
         }
     }
@@ -329,6 +478,7 @@ document.addEventListener('DOMContentLoaded', async function() {
     // 약간의 지연 후 BoardManager 초기화 (SDK 로딩 대기)
     setTimeout(async () => {
         boardManager = new BoardManager();
+        window.boardManager = boardManager; // 전역으로 노출
         await boardManager.init();
 
         // 방문자 게시판 폼 이벤트 리스너
