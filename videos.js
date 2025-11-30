@@ -11,9 +11,13 @@ class VideoLibrary {
 
     init() {
         // 초기 데이터 설정 (localStorage에 없으면)
-        if (Object.keys(this.videos).length === 0) {
+        if (!this.videos || Object.keys(this.videos).length === 0) {
+            console.log('📹 초기 데이터 로드 중...');
             this.videos = this.getDefaultVideos();
             this.saveVideos();
+            console.log('✅ 초기 데이터 로드 완료:', Object.keys(this.videos));
+        } else {
+            console.log('📹 저장된 데이터 로드 완료:', Object.keys(this.videos));
         }
 
         // 이벤트 리스너 등록
@@ -21,6 +25,7 @@ class VideoLibrary {
 
         // 초기 렌더링
         this.renderAllCategories();
+        console.log('✅ 영상 라이브러리 초기화 완료');
     }
 
     // 기본 예제 데이터
@@ -147,10 +152,12 @@ class VideoLibrary {
             adminBtn.classList.add('active');
             adminBtn.innerHTML = '<i class="fas fa-unlock"></i>';
             adminPanel.classList.add('active');
+            document.body.classList.add('admin-mode');
         } else {
             adminBtn.classList.remove('active');
             adminBtn.innerHTML = '<i class="fas fa-lock"></i>';
             adminPanel.classList.remove('active');
+            document.body.classList.remove('admin-mode');
         }
     }
 
@@ -213,6 +220,11 @@ class VideoLibrary {
     // 특정 카테고리 렌더링
     renderCategory(category) {
         const grid = document.getElementById(`grid-${category}`);
+        if (!grid) {
+            console.error(`Grid not found for category: ${category}`);
+            return;
+        }
+
         const videos = this.videos[category] || [];
 
         if (videos.length === 0) {
@@ -227,11 +239,17 @@ class VideoLibrary {
 
         grid.innerHTML = videos.map(video => {
             const videoId = this.getYouTubeVideoId(video.url);
+            if (!videoId) {
+                console.warn(`Invalid YouTube URL: ${video.url}`);
+                return '';
+            }
             return `
                 <div class="video-card">
                     <div class="video-embed">
                         <iframe
                             src="https://www.youtube.com/embed/${videoId}"
+                            frameborder="0"
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                             allowfullscreen
                             loading="lazy">
                         </iframe>

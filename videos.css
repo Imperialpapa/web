@@ -262,10 +262,13 @@ body {
     cursor: pointer;
     font-size: 0.9rem;
     transition: all 0.3s ease;
+}
+
+body:not(.admin-mode) .btn-delete {
     display: none;
 }
 
-.admin-panel.active ~ .main-content .btn-delete {
+body.admin-mode .btn-delete {
     display: inline-block;
 }
 
