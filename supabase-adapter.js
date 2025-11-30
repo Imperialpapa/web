@@ -137,14 +137,24 @@ class SupabaseAdapter {
     // 공지사항 추가
     async addNotice(notice) {
         try {
-            const { error } = await this.client
-                .from('notices')
-                .insert([notice]);
+            console.log('🔵 [Supabase] addNotice 호출됨');
+            console.log('🔵 [Supabase] 저장할 데이터:', notice);
+            console.log('🔵 [Supabase] 대상 테이블: notices');
 
-            if (error) throw error;
+            const { data, error } = await this.client
+                .from('notices')
+                .insert([notice])
+                .select();
+
+            if (error) {
+                console.error('🔴 [Supabase] notices 테이블 저장 실패:', error);
+                throw error;
+            }
+
+            console.log('✅ [Supabase] notices 테이블에 저장 성공:', data);
             return true;
         } catch (error) {
-            console.error('공지사항 추가 실패:', error);
+            console.error('🔴 [Supabase] 공지사항 추가 실패:', error);
             throw error;
         }
     }
@@ -214,14 +224,24 @@ class SupabaseAdapter {
     // 방문자 글 추가
     async addGuestPost(post) {
         try {
-            const { error } = await this.client
-                .from('guest_posts')
-                .insert([post]);
+            console.log('🟢 [Supabase] addGuestPost 호출됨');
+            console.log('🟢 [Supabase] 저장할 데이터:', post);
+            console.log('🟢 [Supabase] 대상 테이블: guest_posts');
 
-            if (error) throw error;
+            const { data, error } = await this.client
+                .from('guest_posts')
+                .insert([post])
+                .select();
+
+            if (error) {
+                console.error('🔴 [Supabase] guest_posts 테이블 저장 실패:', error);
+                throw error;
+            }
+
+            console.log('✅ [Supabase] guest_posts 테이블에 저장 성공:', data);
             return true;
         } catch (error) {
-            console.error('방문자 글 추가 실패:', error);
+            console.error('🔴 [Supabase] 방문자 글 추가 실패:', error);
             throw error;
         }
     }

@@ -1115,31 +1115,8 @@ html {
 
     .skill-bar {
         width: 100%;
-.admin-toggle-btn {
-    position: fixed;
-    bottom: 30px;
-    right: 30px;
-    width: 60px;
-    height: 60px;
-    border-radius: 50%;
-    background: var(--gradient);
-    border: none;
-    color: white;
-    font-size: 24px;
-    cursor: pointer;
-    box-shadow: 0 8px 20px rgba(138, 43, 226, 0.4); /* New primary color shadow */
-    z-index: 9999;
-    transition: all 0.3s ease;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
+    }
 
-.admin-toggle-btn:hover {
-    transform: scale(1.1) rotate(10deg);
-    box-shadow: 0 12px 30px rgba(138, 43, 226, 0.6); /* New primary color shadow */
-}
-    
     /* 작은 화면에서 추가 최적화 */
     .hero {
         perspective: 500px; /* 더 작은 perspective */

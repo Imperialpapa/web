@@ -221,6 +221,10 @@ class BoardManager {
 
     // 공지사항 작성 (관리자 전용)
     async addNotice(title, content) {
+        console.log('📢 [BoardManager] addNotice 호출됨');
+        console.log('📢 [BoardManager] 제목:', title);
+        console.log('📢 [BoardManager] 내용:', content);
+
         if (!title || !content) {
             alert('제목과 내용을 모두 입력해주세요.');
             return false;
@@ -234,8 +238,11 @@ class BoardManager {
             isAdmin: true // Firebase 호환성
         };
 
+        console.log('📢 [BoardManager] 생성된 notice 객체:', notice);
+
         if (!this.isInitialized) {
             // localStorage에 저장
+            console.log('📢 [BoardManager] localStorage에 저장');
             this.notices.unshift(notice);
             localStorage.setItem('notices', JSON.stringify(this.notices));
             this.renderNotices();
@@ -243,10 +250,12 @@ class BoardManager {
         }
 
         try {
+            console.log('📢 [BoardManager] backend.addNotice() 호출');
             await this.backend.addNotice(notice);
+            console.log('✅ [BoardManager] 공지사항 추가 성공');
             return true;
         } catch (error) {
-            console.error('공지사항 작성 실패:', error);
+            console.error('🔴 [BoardManager] 공지사항 작성 실패:', error);
             alert('공지사항 작성에 실패했습니다.');
             return false;
         }

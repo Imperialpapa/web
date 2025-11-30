@@ -562,6 +562,8 @@ class AdminMode {
 
     // 공지사항 추가
     async addNotice() {
+        console.log('🔔 [Admin] addNotice 호출됨');
+
         if (!this.isAdminMode) {
             alert('관리자 모드가 활성화되지 않았습니다.');
             return;
@@ -570,28 +572,37 @@ class AdminMode {
         // 공지사항 제목 입력
         const title = prompt('공지사항 제목을 입력하세요:');
         if (!title || title.trim() === '') {
+            console.log('🔔 [Admin] 제목 입력 취소됨');
             return;
         }
 
         // 공지사항 내용 입력
         const content = prompt('공지사항 내용을 입력하세요:');
         if (!content || content.trim() === '') {
+            console.log('🔔 [Admin] 내용 입력 취소됨');
             return;
         }
 
+        console.log('🔔 [Admin] 제목:', title);
+        console.log('🔔 [Admin] 내용:', content);
+
         // boardManager가 초기화되었는지 확인
         if (typeof boardManager === 'undefined' || !boardManager) {
+            console.error('🔴 [Admin] boardManager가 초기화되지 않음');
             alert('게시판 시스템이 초기화되지 않았습니다. 페이지를 새로고침하세요.');
             return;
         }
 
+        console.log('🔔 [Admin] boardManager.addNotice() 호출 예정');
+
         try {
             const success = await boardManager.addNotice(title, content);
             if (success) {
+                console.log('✅ [Admin] 공지사항 등록 성공');
                 alert('공지사항이 성공적으로 등록되었습니다!');
             }
         } catch (error) {
-            console.error('공지사항 추가 중 오류:', error);
+            console.error('🔴 [Admin] 공지사항 추가 중 오류:', error);
             alert('공지사항 추가에 실패했습니다.');
         }
     }
